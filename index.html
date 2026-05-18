@@ -1,0 +1,1295 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Clase completa sobre IDEs para programación en Python">
+    <meta name="keywords" content="Python, IDE, Visual Studio Code, PyCharm, Jupyter, Colab">
+    <title>Clase: IDEs para Programación en Python</title>
+    <style>
+        :root {
+            --color-primary: #0066cc;
+            --color-primary-dark: #004999;
+            --color-secondary: #6c757d;
+            --color-accent: #0099ff;
+            --color-success: #28a745;
+            --color-warning: #ffc107;
+            --color-danger: #dc3545;
+            --color-light: #f8f9fa;
+            --color-white: #ffffff;
+            --color-dark: #212529;
+            --color-border: #dee2e6;
+            --font-family-primary: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            --spacing-unit: 1rem;
+            --transition: all 0.3s ease;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+        body {
+            font-family: var(--font-family-primary);
+            line-height: 1.6;
+            color: var(--color-dark);
+            background-color: #f5f7fb;
+        }
+
+        /* NAVEGACIÓN */
+        nav {
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+            background-color: var(--color-white);
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+        }
+
+        .navbar-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: var(--spacing-unit);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: 1rem;
+        }
+
+        .navbar-brand {
+            font-size: 1.5rem;
+            font-weight: 700;
+            color: var(--color-primary);
+            text-decoration: none;
+        }
+
+        .navbar-menu {
+            display: flex;
+            list-style: none;
+            gap: 2rem;
+            flex-wrap: wrap;
+        }
+
+        .navbar-menu a {
+            color: var(--color-secondary);
+            text-decoration: none;
+            font-weight: 500;
+            transition: var(--transition);
+            font-size: 0.95rem;
+        }
+
+        .navbar-menu a:hover {
+            color: var(--color-primary);
+        }
+
+        .navbar-toggle {
+            display: none;
+            flex-direction: column;
+            cursor: pointer;
+            background: none;
+            border: none;
+        }
+
+        .navbar-toggle span {
+            width: 25px;
+            height: 3px;
+            background-color: var(--color-primary);
+            margin: 5px 0;
+            transition: var(--transition);
+        }
+
+        /* HEADER */
+        header {
+            background: linear-gradient(135deg, var(--color-primary) 0%, var(--color-primary-dark) 100%);
+            color: var(--color-white);
+            padding: 4rem var(--spacing-unit) 3rem;
+            text-align: center;
+        }
+
+        header h1 {
+            font-size: 2.5rem;
+            margin-bottom: 1rem;
+            font-weight: 700;
+        }
+
+        header p {
+            font-size: 1.2rem;
+            opacity: 0.95;
+            max-width: 800px;
+            margin: 0 auto;
+        }
+
+        /* CONTENEDOR PRINCIPAL */
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 var(--spacing-unit);
+        }
+
+        /* SECCIONES */
+        section {
+            background-color: var(--color-white);
+            margin: 2rem 0;
+            padding: 3rem;
+            border-radius: 8px;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
+        }
+
+        section h2 {
+            font-size: 2rem;
+            color: var(--color-primary);
+            margin-bottom: 1.5rem;
+            padding-bottom: 1rem;
+            border-bottom: 3px solid var(--color-accent);
+            display: inline-block;
+        }
+
+        section h3 {
+            font-size: 1.4rem;
+            color: var(--color-primary-dark);
+            margin-top: 2rem;
+            margin-bottom: 1rem;
+        }
+
+        section h4 {
+            font-size: 1.1rem;
+            color: var(--color-primary);
+            margin-top: 1.5rem;
+            margin-bottom: 0.8rem;
+        }
+
+        section h5 {
+            font-size: 1rem;
+            color: var(--color-primary-dark);
+            margin-top: 1rem;
+            margin-bottom: 0.5rem;
+        }
+
+        section p {
+            font-size: 1rem;
+            line-height: 1.8;
+            margin-bottom: 1rem;
+            color: #333;
+        }
+
+        section ul, section ol {
+            margin-left: 2rem;
+            margin-bottom: 1.5rem;
+        }
+
+        section li {
+            margin-bottom: 0.8rem;
+            font-size: 1rem;
+            line-height: 1.8;
+        }
+
+        /* TARJETAS IDE */
+        .ide-cards {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 2rem;
+            margin: 2rem 0;
+        }
+
+        .ide-card {
+            background: linear-gradient(135deg, #f8f9fa 0%, #fff 100%);
+            border: 2px solid var(--color-border);
+            border-radius: 8px;
+            padding: 2rem;
+            transition: var(--transition);
+            cursor: pointer;
+        }
+
+        .ide-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 8px 20px rgba(0, 102, 204, 0.15);
+            border-color: var(--color-primary);
+        }
+
+        .ide-card h4 {
+            font-size: 1.3rem;
+            color: var(--color-primary);
+            margin-bottom: 1rem;
+            margin-top: 0;
+        }
+
+        .ide-card p {
+            font-size: 0.95rem;
+            color: var(--color-secondary);
+            margin-bottom: 0.8rem;
+        }
+
+        .ide-card .badge {
+            display: inline-block;
+            background-color: var(--color-accent);
+            color: var(--color-white);
+            padding: 0.4rem 0.8rem;
+            border-radius: 20px;
+            font-size: 0.85rem;
+            margin-right: 0.5rem;
+            margin-bottom: 1rem;
+        }
+
+        /* TABLA COMPARATIVA */
+        .table-wrapper {
+            overflow-x: auto;
+            margin: 2rem 0;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            background-color: var(--color-white);
+            border-radius: 8px;
+            overflow: hidden;
+        }
+
+        table thead {
+            background-color: var(--color-primary);
+            color: var(--color-white);
+        }
+
+        table th {
+            padding: 1.2rem;
+            text-align: left;
+            font-weight: 600;
+            border: none;
+        }
+
+        table td {
+            padding: 1rem 1.2rem;
+            border-bottom: 1px solid var(--color-border);
+        }
+
+        table tbody tr:hover {
+            background-color: #f0f4ff;
+        }
+
+        table tbody tr:nth-child(even) {
+            background-color: #fafbfc;
+        }
+
+        /* CAJAS DE INFORMACIÓN */
+        .info-box {
+            background-color: #e7f3ff;
+            border-left: 4px solid var(--color-primary);
+            padding: 1.5rem;
+            margin: 1.5rem 0;
+            border-radius: 4px;
+        }
+
+        .info-box.warning {
+            background-color: #fff3cd;
+            border-left-color: var(--color-warning);
+        }
+
+        .info-box.success {
+            background-color: #d4edda;
+            border-left-color: var(--color-success);
+        }
+
+        .info-box strong {
+            color: var(--color-primary);
+        }
+
+        .info-box.warning strong {
+            color: #856404;
+        }
+
+        .info-box.success strong {
+            color: #155724;
+        }
+
+        /* CÓDIGO MEJORADO */
+        .code-block {
+            background-color: #1e1e1e;
+            color: #d4d4d4;
+            padding: 1.5rem;
+            border-radius: 6px;
+            overflow-x: auto;
+            margin: 1.5rem 0;
+            font-family: 'Courier New', Consolas, monospace;
+            font-size: 0.9rem;
+            line-height: 1.6;
+            position: relative;
+            border: 1px solid #333;
+        }
+
+        .code-block code {
+            display: block;
+            white-space: pre-wrap;
+            word-wrap: break-word;
+            word-break: break-word;
+        }
+
+        .copy-btn {
+            position: absolute;
+            top: 0.75rem;
+            right: 0.75rem;
+            background-color: var(--color-accent);
+            color: var(--color-white);
+            border: none;
+            padding: 0.5rem 1rem;
+            border-radius: 4px;
+            cursor: pointer;
+            font-size: 0.85rem;
+            transition: var(--transition);
+            z-index: 10;
+        }
+
+        .copy-btn:hover {
+            background-color: var(--color-primary);
+        }
+
+        /* ESTRUCTURA DEL PROYECTO */
+        .project-structure {
+            background-color: #1e1e1e;
+            color: #d4d4d4;
+            border: 1px solid #333;
+            border-radius: 6px;
+            padding: 1.5rem;
+            margin: 1.5rem 0;
+            font-family: 'Courier New', Consolas, monospace;
+            font-size: 0.9rem;
+            line-height: 1.8;
+            overflow-x: auto;
+        }
+
+        .project-structure strong {
+            color: #4ec9b0;
+            font-weight: 600;
+        }
+
+        .project-structure div {
+            display: block;
+            margin: 0.2rem 0;
+            white-space: pre;
+        }
+
+        /* TARJETA DE ARCHIVO */
+        .file-card {
+            background-color: #f5f5f5;
+            border: 1px solid var(--color-border);
+            border-radius: 6px;
+            padding: 1rem;
+            margin: 1.5rem 0;
+            overflow: hidden;
+        }
+
+        .file-card-title {
+            background-color: #e8e8e8;
+            padding: 0.8rem 1rem;
+            margin: -1rem -1rem 1rem -1rem;
+            font-weight: 600;
+            color: var(--color-primary);
+            font-family: 'Courier New', Consolas, monospace;
+            font-size: 0.9rem;
+            border-bottom: 2px solid var(--color-accent);
+        }
+
+        /* EXTENSIONES */
+        .extension-item {
+            background-color: #f8f9fa;
+            border: 1px solid var(--color-border);
+            border-radius: 8px;
+            padding: 1.5rem;
+            margin-bottom: 2rem;
+            transition: var(--transition);
+        }
+
+        .extension-item:hover {
+            box-shadow: 0 4px 12px rgba(0, 102, 204, 0.1);
+        }
+
+        .extension-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: start;
+            margin-bottom: 1rem;
+            flex-wrap: wrap;
+            gap: 1rem;
+        }
+
+        .extension-title {
+            font-size: 1.3rem;
+            font-weight: 600;
+            color: var(--color-primary);
+        }
+
+        .extension-dev {
+            font-size: 0.9rem;
+            color: var(--color-secondary);
+            font-style: italic;
+        }
+
+        .extension-badge {
+            background-color: var(--color-primary);
+            color: var(--color-white);
+            padding: 0.4rem 0.8rem;
+            border-radius: 4px;
+            font-size: 0.85rem;
+            font-weight: 600;
+        }
+
+        .extension-content h5 {
+            font-size: 1.05rem;
+            color: var(--color-primary-dark);
+            margin-top: 1rem;
+            margin-bottom: 0.5rem;
+        }
+
+        .extension-content p, .extension-content ul {
+            font-size: 0.95rem;
+            margin-bottom: 0.8rem;
+        }
+
+        /* BOTONES */
+        .btn {
+            display: inline-block;
+            padding: 0.75rem 1.5rem;
+            border-radius: 4px;
+            text-decoration: none;
+            font-weight: 600;
+            transition: var(--transition);
+            border: none;
+            cursor: pointer;
+            font-size: 0.95rem;
+        }
+
+        .btn-primary {
+            background-color: var(--color-primary);
+            color: var(--color-white);
+        }
+
+        .btn-primary:hover {
+            background-color: var(--color-primary-dark);
+            transform: translateY(-2px);
+        }
+
+        /* ÍNDICE */
+        .table-of-contents {
+            background-color: #f0f4ff;
+            border: 2px solid var(--color-primary);
+            border-radius: 8px;
+            padding: 2rem;
+            margin: 2rem 0;
+        }
+
+        .table-of-contents h3 {
+            margin-top: 0;
+            color: var(--color-primary);
+        }
+
+        .table-of-contents ol {
+            margin-left: 1.5rem;
+        }
+
+        .table-of-contents a {
+            color: var(--color-primary);
+            text-decoration: none;
+            transition: var(--transition);
+        }
+
+        .table-of-contents a:hover {
+            text-decoration: underline;
+            color: var(--color-primary-dark);
+        }
+        /* ESTRUCTURA DEL PROYECTO - MEJORADO */
+    .project-structure {
+        background-color: #1e1e1e;
+        color: #d4d4d4;
+        border: 1px solid #333;
+        border-radius: 6px;
+        padding: 1.5rem;
+        margin: 1.5rem 0;
+        font-family: 'Courier New', Consolas, monospace;
+        font-size: 0.9rem;
+        line-height: 1.8;
+        overflow-x: auto;
+        white-space: pre;
+    }
+
+    .project-structure strong {
+        color: #4ec9b0;
+        font-weight: 600;
+    }
+
+    .tree-line {
+        color: #808080;
+    }
+
+    .tree-folder {
+        color: #d4d4d4;
+    }
+
+    .tree-file {
+        color: #ce9178;
+    }
+
+        /* FOOTER */
+        footer {
+            background-color: var(--color-dark);
+            color: var(--color-white);
+            text-align: center;
+            padding: 2rem;
+            margin-top: 3rem;
+        }
+
+        footer p {
+            margin: 0.5rem 0;
+            font-size: 0.95rem;
+        }
+
+        footer a {
+            color: var(--color-accent);
+            text-decoration: none;
+        }
+
+        footer a:hover {
+            text-decoration: underline;
+        }
+
+        /* RESPONSIVE */
+        @media (max-width: 768px) {
+            header h1 {
+                font-size: 1.8rem;
+            }
+
+            header p {
+                font-size: 1rem;
+            }
+
+            section {
+                padding: 1.5rem;
+                margin: 1rem 0;
+            }
+
+            section h2 {
+                font-size: 1.5rem;
+            }
+
+            section h3 {
+                font-size: 1.1rem;
+            }
+
+            .navbar-menu {
+                gap: 1rem;
+                font-size: 0.9rem;
+            }
+
+            .navbar-toggle {
+                display: flex;
+            }
+
+            table {
+                font-size: 0.9rem;
+            }
+
+            table th, table td {
+                padding: 0.75rem;
+            }
+
+            .ide-cards {
+                grid-template-columns: 1fr;
+            }
+
+            .extension-header {
+                flex-direction: column;
+            }
+
+            .table-of-contents {
+                padding: 1.5rem;
+            }
+
+            .code-block {
+                font-size: 0.85rem;
+            }
+
+            .project-structure {
+                font-size: 0.85rem;
+            }
+        }
+
+        @media (max-width: 480px) {
+            html {
+                font-size: 14px;
+            }
+
+            header h1 {
+                font-size: 1.5rem;
+            }
+
+            section {
+                padding: 1rem;
+            }
+
+            section h2 {
+                font-size: 1.3rem;
+            }
+
+            .navbar-container {
+                padding: 0.75rem;
+            }
+
+            .navbar-brand {
+                font-size: 1.2rem;
+            }
+
+            body {
+                font-size: 0.95rem;
+            }
+        }
+
+        /* UTILIDADES */
+        .text-center {
+            text-align: center;
+        }
+
+        .mt-3 {
+            margin-top: 2rem;
+        }
+
+        .mb-3 {
+            margin-bottom: 2rem;
+        }
+
+        .highlight {
+            background-color: #fff3cd;
+            padding: 0.2rem 0.4rem;
+            border-radius: 3px;
+        }
+    </style>
+</head>
+<body>
+
+<!-- NAVEGACIÓN -->
+<nav>
+    <div class="navbar-container">
+        <a href="#" class="navbar-brand">🐍 IDEs Python</a>
+        <button class="navbar-toggle" id="navbarToggle">
+            <span></span>
+            <span></span>
+            <span></span>
+        </button>
+        <ul class="navbar-menu" id="navbarMenu">
+            <li><a href="#introduccion">Introducción</a></li>
+            <li><a href="#ides">IDEs</a></li>
+            <li><a href="#comparativa">Comparativa</a></li>
+            <li><a href="#vscode">VS Code</a></li>
+            <li><a href="#conclusiones">Conclusiones</a></li>
+        </ul>
+    </div>
+</nav>
+
+<!-- HEADER -->
+<header>
+    <h1>IDEs para Programación en Python</h1>
+    <p>Una guía completa para elegir, instalar y configurar tu entorno de desarrollo ideal</p>
+</header>
+
+<div class="container">
+
+    <!-- TABLA DE CONTENIDOS -->
+    <section class="table-of-contents">
+        <h3>📑 Tabla de Contenidos</h3>
+        <ol>
+            <li><a href="#introduccion">Introducción a IDEs</a></li>
+            <li><a href="#ides">Los 4 IDEs Principales</a></li>
+            <li><a href="#comparativa">Tabla Comparativa</a></li>
+            <li><a href="#vscode">Visual Studio Code - Guía Completa</a></li>
+            <li><a href="#extensiones">Las 10 Extensiones Imprescindibles</a></li>
+            <li><a href="#ejemplo">Ejemplo Práctico</a></li>
+            <li><a href="#conclusiones">Conclusiones y Recomendaciones</a></li>
+        </ol>
+    </section>
+
+    <!-- SECCIÓN 1: INTRODUCCIÓN -->
+    <section id="introduccion">
+        <h2>1. Introducción a IDEs</h2>
+
+        <h3>¿Qué es un IDE?</h3>
+        <p>
+            Un <span class="highlight">IDE (Integrated Development Environment)</span> o <strong>Entorno Integrado de Desarrollo</strong> es una aplicación que proporciona herramientas necesarias para escribir, compilar, depurar y ejecutar código de forma eficiente. A diferencia de un editor de texto simple, un IDE integra múltiples funcionalidades en una única interfaz.
+        </p>
+
+        <h3>Componentes Básicos de un IDE</h3>
+        <ul>
+            <li><strong>Editor de Código:</strong> Resaltado de sintaxis, autocompletado y navegación inteligente</li>
+            <li><strong>Compilador/Intérprete:</strong> Ejecuta y prueba tu código</li>
+            <li><strong>Depurador:</strong> Permite identificar y corregir errores paso a paso</li>
+            <li><strong>Control de Versiones:</strong> Integración con Git para gestionar cambios</li>
+            <li><strong>Gestor de Paquetes:</strong> Instala y administra librerías externas</li>
+            <li><strong>Terminal Integrada:</strong> Ejecuta comandos sin abandonar el IDE</li>
+            <li><strong>Extensiones/Plugins:</strong> Amplía funcionalidades según tus necesidades</li>
+        </ul>
+
+        <h3>IDE vs Editor de Texto: ¿Cuál es la Diferencia?</h3>
+        <p>
+            Si bien ambos permiten escribir código, los IDEs ofrecen características avanzadas que agilizan el desarrollo:
+        </p>
+        <div class="table-wrapper">
+            <table>
+                <thead>
+                    <tr>
+                        <th>Aspecto</th>
+                        <th>Editor de Texto</th>
+                        <th>IDE</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>Resaltado de Sintaxis</td>
+                        <td>Sí</td>
+                        <td>Sí (Avanzado)</td>
+                    </tr>
+                    <tr>
+                        <td>Autocompletado</td>
+                        <td>Limitado</td>
+                        <td>Muy avanzado</td>
+                    </tr>
+                    <tr>
+                        <td>Depuración</td>
+                        <td>No</td>
+                        <td>Sí, integrada</td>
+                    </tr>
+                    <tr>
+                        <td>Control de Versiones</td>
+                        <td>No</td>
+                        <td>Integrado</td>
+                    </tr>
+                    <tr>
+                        <td>Terminal Integrada</td>
+                        <td>No</td>
+                        <td>Sí</td>
+                    </tr>
+                    <tr>
+                        <td>Extensiones</td>
+                        <td>Limitadas</td>
+                        <td>Amplias</td>
+                    </tr>
+                    <tr>
+                        <td>Curva de Aprendizaje</td>
+                        <td>Muy suave</td>
+                        <td>Moderada</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+
+        <h3>Criterios para Elegir un IDE</h3>
+        <ul>
+            <li><strong>Nivel de Experiencia:</strong> Principiantes vs desarrolladores avanzados</li>
+            <li><strong>Tipo de Proyecto:</strong> Scripts simples, aplicaciones web, ciencia de datos, etc.</li>
+            <li><strong>Rendimiento:</strong> Consumo de recursos (RAM, CPU)</li>
+            <li><strong>Curva de Aprendizaje:</strong> Facilidad de uso y documentación</li>
+            <li><strong>Costo:</strong> Gratuito o de pago</li>
+            <li><strong>Compatibilidad:</strong> Sistema operativo (Windows, macOS, Linux)</li>
+            <li><strong>Comunidad:</strong> Soporte y cantidad de extensiones disponibles</li>
+            <li><strong>Funcionalidades Específicas:</strong> Depuración avanzada, análisis estático, etc.</li>
+        </ul>
+
+        <div class="info-box">
+            <strong>💡 Consejo:</strong> No existe un IDE "perfecto". La mejor opción depende de tus necesidades específicas y preferencias personales.
+        </div>
+    </section>
+
+    <!-- SECCIÓN 2: LOS 4 IDEs PRINCIPALES -->
+    <section id="ides">
+        <h2>2. Los 4 IDEs Principales para Python</h2>
+
+        <div class="ide-cards">
+            <!-- VS CODE -->
+            <div class="ide-card">
+                <h4>Visual Studio Code</h4>
+                <div class="badge">Recomendado</div>
+                <p><strong>Licencia:</strong> Gratuito</p>
+                <p><strong>Plataforma:</strong> Windows, macOS, Linux</p>
+                <p>Editor ultraligero y altamente personalizable con excelente soporte para Python.</p>
+                <a href="#vscode" class="btn btn-primary" style="margin-top: 1rem;">Ver Detalles</a>
+            </div>
+
+            <!-- PyCharm -->
+            <div class="ide-card">
+                <h4>PyCharm</h4>
+                <div class="badge">Profesional</div>
+                <p><strong>Licencia:</strong> Community (Gratuita) / Professional (Pago)</p>
+                <p><strong>Plataforma:</strong> Windows, macOS, Linux</p>
+                <p>IDE especializado en Python con herramientas poderosas para desarrollo profesional.</p>
+            </div>
+
+            <!-- Google Colab -->
+            <div class="ide-card">
+                <h4>Google Colab</h4>
+                <div class="badge">Cloud</div>
+                <p><strong>Licencia:</strong> Gratuito</p>
+                <p><strong>Plataforma:</strong> Basado en navegador</p>
+                <p>Entorno Jupyter en la nube, ideal para ciencia de datos y Machine Learning.</p>
+            </div>
+
+            <!-- Anaconda + Jupyter -->
+            <div class="ide-card">
+                <h4>Anaconda + Jupyter</h4>
+                <div class="badge">Data Science</div>
+                <p><strong>Licencia:</strong> Gratuito</p>
+                <p><strong>Plataforma:</strong> Windows, macOS, Linux</p>
+                <p>Suite completa para ciencia de datos con Jupyter Notebook preinstalado.</p>
+            </div>
+        </div>
+
+        <!-- VISUAL STUDIO CODE -->
+        <div style="margin-top: 3rem;">
+            <h3>🔹 Visual Studio Code (VS Code)</h3>
+
+            <h4>Definición y Propósito</h4>
+            <p>
+                Visual Studio Code es un editor de código fuente ligero pero potente desarrollado por Microsoft. Aunque técnicamente es un editor de texto avanzado, su ecosistema de extensiones lo convierte en un IDE completo para Python y muchos otros lenguajes.
+            </p>
+
+            <h4>Historia y Versión Actual</h4>
+            <p>
+                VS Code fue lanzado en 2015 y se ha convertido en uno de los editores más populares del mundo. En 2026, cuenta con millones de descargas mensuales y una comunidad muy activa. Su arquitectura modular permite a los desarrolladores personalizarlo completamente.
+            </p>
+
+            <h4>Requisitos del Sistema</h4>
+            <ul>
+                <li>Windows: Windows 7 o superior, 1.6 GHz mínimo</li>
+                <li>macOS: macOS 10.11 (El Capitan) o superior</li>
+                <li>Linux: GLIBC 2.17 o superior</li>
+                <li>RAM mínima recomendada: 2 GB</li>
+                <li>Espacio en disco: ~200 MB</li>
+            </ul>
+
+            <h4>Guía de Instalación</h4>
+            <ol>
+                <li><strong>Descarga:</strong> Visita <a href="https://code.visualstudio.com" target="_blank">https://code.visualstudio.com</a></li>
+                <li><strong>Selecciona tu Sistema Operativo:</strong> Windows, macOS o Linux</li>
+                <li><strong>Ejecuta el instalador:</strong> Haz doble clic en el archivo descargado</li>
+                <li><strong>Sigue los pasos del instalador:</strong> Acepta los términos y condiciones</li>
+                <li><strong>Finaliza la instalación:</strong> VS Code se abrirá automáticamente</li>
+            </ol>
+
+            <div class="info-box">
+                <strong>✅ Verificación:</strong> Abre la terminal y ejecuta: <code>code --version</code>
+            </div>
+
+            <h4>Enlaces Oficiales</h4>
+            <ul>
+                <li><strong>Sitio Oficial:</strong> <a href="https://code.visualstudio.com" target="_blank">https://code.visualstudio.com</a></li>
+                <li><strong>Documentación:</strong> <a href="https://code.visualstudio.com/docs" target="_blank">https://code.visualstudio.com/docs</a></li>
+                <li><strong>Marketplace de Extensiones:</strong> <a href="https://marketplace.visualstudio.com" target="_blank">https://marketplace.visualstudio.com</a></li>
+                <li><strong>GitHub:</strong> <a href="https://github.com/microsoft/vscode" target="_blank">https://github.com/microsoft/vscode</a></li>
+            </ul>
+
+            <h4>Características Únicas</h4>
+            <ul>
+                <li>IntelliSense: Autocompletado ultra inteligente</li>
+                <li>Debugging integrado: Depurador paso a paso</li>
+                <li>Control de Git nativo: Gestiona repositorios sin salir del editor</li>
+                <li>Terminal integrada: Ejecuta comandos sin abrir consola</li>
+                <li>Marketplace de extensiones: Miles de plugins disponibles</li>
+                <li>Sincronización en la nube: Sincroniza configuración entre dispositivos</li>
+                <li>Live Share: Colabora con otros desarrolladores en tiempo real</li>
+            </ul>
+        </div>
+
+        <!-- PyCharm -->
+        <div style="margin-top: 3rem;">
+            <h3>🔹 PyCharm</h3>
+
+            <h4>Definición y Propósito</h4>
+            <p>
+                PyCharm es un IDE completo y especializado en Python, desarrollado por JetBrains. Es un entorno profesional con características avanzadas para desarrollo de aplicaciones Python a nivel empresarial.
+            </p>
+
+            <h4>Historia y Versión Actual</h4>
+            <p>
+                PyCharm fue lanzado en 2010 y se ha consolidado como el IDE número uno para Python en entornos profesionales. La versión Community Edition es gratuita, mientras que PyCharm Professional ofrece características adicionales. En 2026, cuenta con soporte completo para las últimas características de Python 3.14+.
+            </p>
+
+            <h4>Requisitos del Sistema</h4>
+            <ul>
+                <li>Windows: Windows 8 o superior</li>
+                <li>macOS: macOS 10.13 o superior</li>
+                <li>Linux: GLIBC 2.17 o superior</li>
+                <li>RAM recomendada: 4 GB mínimo, 8 GB ideal</li>
+                <li>Espacio en disco: ~2.5 GB</li>
+                <li>Java: JRE 11 o superior (incluido en el instalador)</li>
+            </ul>
+
+            <h4>Guía de Instalación</h4>
+            <ol>
+                <li><strong>Descarga:</strong> Visita <a href="https://www.jetbrains.com/pycharm" target="_blank">https://www.jetbrains.com/pycharm</a></li>
+                <li><strong>Elige la versión:</strong> Community (gratuita) o Professional (pago)</li>
+                <li><strong>Descarga según tu SO:</strong> Windows, macOS o Linux</li>
+                <li><strong>Ejecuta el instalador:</strong> Haz doble clic en el archivo</li>
+                <li><strong>Sigue los pasos:</strong> Acepta licencias y configura opciones</li>
+                <li><strong>Abre PyCharm:</strong> Se abrirá el asistente de configuración inicial</li>
+            </ol>
+        </div>
+
+        <!-- Google Colab -->
+        <div style="margin-top: 3rem;">
+            <h3>🔹 Google Colab</h3>
+
+            <h4>Definición y Propósito</h4>
+            <p>
+                Google Colab (Colaboratory) es un servicio basado en la nube que proporciona cuadernos Jupyter gratuitos. Permite escribir y ejecutar código Python directamente en el navegador sin necesidad de instalar nada.
+            </p>
+
+            <h4>Requisitos del Sistema</h4>
+            <ul>
+                <li>Navegador web moderno (Chrome, Firefox, Safari, Edge)</li>
+                <li>Conexión a Internet estable</li>
+                <li>Cuenta de Google gratuita</li>
+                <li>Sin requisitos locales de instalación</li>
+            </ul>
+
+            <h4>Acceso</h4>
+            <p>
+                Simplemente visita <a href="https://colab.research.google.com" target="_blank">https://colab.research.google.com</a>, inicia sesión con tu cuenta de Google y comienza a crear notebooks.
+            </p>
+        </div>
+
+        <!-- Anaconda + Jupyter -->
+        <div style="margin-top: 3rem;">
+            <h3>🔹 Anaconda + Jupyter Notebook</h3>
+
+            <h4>Definición y Propósito</h4>
+            <p>
+                Anaconda es una distribución Python gratuita que incluye más de 1,500 paquetes científicos preinstalados. Jupyter Notebook es un entorno web interactivo para ejecutar código Python en "celdas".
+            </p>
+
+            <h4>Descarga e Instalación</h4>
+            <p>
+                Descarga desde <a href="https://www.anaconda.com/download" target="_blank">https://www.anaconda.com/download</a>, elige Python 3.14, ejecuta el instalador y sigue los pasos.
+            </p>
+
+            <h4>Iniciar Jupyter</h4>
+            <div class="code-block">
+                <button class="copy-btn" onclick="copiarCodigo(this)">Copiar</button>
+                <code>jupyter notebook</code>
+            </div>
+        </div>
+
+    </section>
+
+    <!-- SECCIÓN 4: VISUAL STUDIO CODE - EJEMPLO PRÁCTICO -->
+    <section id="ejemplo">
+        <h2>4. Ejemplo Práctico Completo</h2>
+
+        <h3>Proyecto de Ejemplo: API Simple con Flask</h3>
+
+        <p>Vamos a crear un proyecto completo donde veremos cómo todas las extensiones trabajan juntas para mejorar la calidad del código.</p>
+
+        <h4>Estructura del Proyecto</h4>
+
+        <div class="project-structure">
+<strong>proyecto_api/</strong>
+<!-- ESTRUCTURA DEL PROYECTO MEJORADA -->
+<div class="project-structure"><strong>proyecto_api/</strong>
+├── <span class="tree-folder">src/</span>
+│   ├── <span class="tree-file">__init__.py</span>
+│   ├── <span class="tree-file">app.py</span>
+│   └── <span class="tree-folder">utils/</span>
+│       ├── <span class="tree-file">__init__.py</span>
+│       └── <span class="tree-file">helpers.py</span>
+├── <span class="tree-folder">tests/</span>
+│   ├── <span class="tree-file">__init__.py</span>
+│   └── <span class="tree-file">test_app.py</span>
+├── <span class="tree-file">requirements.txt</span>
+├── <span class="tree-file">.flake8</span>
+└── <span class="tree-file">.gitignore</span></div>
+        </div>
+
+        <div class="info-box">
+            <strong>📂 Explicación:</strong> src/ contiene el código, tests/ los tests, requirements.txt lista las dependencias.
+        </div>
+
+        <h4>Archivo: requirements.txt</h4>
+
+        <div class="file-card">
+            <div class="file-card-title">📄 requirements.txt</div>
+            <div class="code-block">
+                <button class="copy-btn" onclick="copiarCodigo(this)">Copiar</button>
+                <code>Flask==3.1.3
+pytest==9.0.3
+pytest-cov==4.1.0</code>
+            </div>
+        </div>
+
+        <h4>Archivo: .flake8</h4>
+
+        <div class="file-card">
+            <div class="file-card-title">📄 .flake8</div>
+            <div class="code-block">
+                <button class="copy-btn" onclick="copiarCodigo(this)">Copiar</button>
+                <code>[flake8]
+max-line-length = 100
+exclude = .git,__pycache__,venv
+ignore = E203, W503</code>
+            </div>
+        </div>
+
+        <h4>Archivo: src/__init__.py</h4>
+
+        <div class="file-card">
+            <div class="file-card-title">🐍 src/__init__.py</div>
+            <div class="code-block">
+                <button class="copy-btn" onclick="copiarCodigo(this)">Copiar</button>
+                <code>"""Inicializador del paquete src"""
+__version__ = "1.0.0"</code>
+            </div>
+        </div>
+
+        <h4>Archivo: src/app.py</h4>
+
+        <div class="file-card">
+            <div class="file-card-title">🐍 src/app.py</div>
+            <div class="code-block">
+                <button class="copy-btn" onclick="copiarCodigo(this)">Copiar</button>
+                <code>from flask import Flask, jsonify, request
+from src.utils.helpers import validar_email
+
+app = Flask(__name__)
+
+# ! Importante: Esta es la aplicación principal
+
+
+@app.route('/usuarios', methods=['GET'])
+def obtener_usuarios():
+    """Obtiene lista de todos los usuarios."""
+    usuarios = [
+        {'id': 1, 'nombre': 'Juan', 'email': 'juan@example.com'},
+        {'id': 2, 'nombre': 'María', 'email': 'maria@example.com'},
+    ]
+    return jsonify(usuarios)
+
+
+@app.route('/usuarios', methods=['POST'])
+def crear_usuario():
+    """Crea un nuevo usuario con validación."""
+    datos = request.get_json()
+
+    if not validar_email(datos.get('email')):
+        return jsonify({'error': 'Email inválido'}), 400
+
+    nuevo_usuario = {
+        'id': 3,
+        'nombre': datos.get('nombre'),
+        'email': datos.get('email')
+    }
+
+    return jsonify(nuevo_usuario), 201
+
+
+if __name__ == '__main__':
+    app.run(debug=True)</code>
+            </div>
+        </div>
+
+        <h4>Archivo: src/utils/helpers.py</h4>
+
+        <div class="file-card">
+            <div class="file-card-title">🐍 src/utils/helpers.py</div>
+            <div class="code-block">
+                <button class="copy-btn" onclick="copiarCodigo(this)">Copiar</button>
+                <code>import re
+from typing import Optional
+
+# * Funciones de utilidad reutilizables
+
+
+def validar_email(email: str) -> bool:
+    """
+    Valida formato de email.
+
+    Args:
+        email: String con dirección de email
+
+    Returns:
+        True si email es válido, False en caso contrario
+    """
+    patron = r'^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$'
+    return re.match(patron, email) is not None
+
+
+def procesar_nombre(nombre: str) -> str:
+    """Convierte nombre a formato título."""
+    return nombre.title().strip()</code>
+            </div>
+        </div>
+
+        <h4>Archivo: tests/test_app.py</h4>
+
+        <div class="file-card">
+            <div class="file-card-title">🧪 tests/test_app.py</div>
+            <div class="code-block">
+                <button class="copy-btn" onclick="copiarCodigo(this)">Copiar</button>
+                <code>import pytest
+from src.app import app
+from src.utils.helpers import validar_email, procesar_nombre
+
+
+@pytest.fixture
+def cliente():
+    """Cliente de prueba para la app."""
+    app.config['TESTING'] = True
+    with app.test_client() as cliente:
+        yield cliente
+
+
+def test_validar_email_valido():
+    """Test para email válido."""
+    assert validar_email('usuario@example.com') is True
+
+
+def test_validar_email_invalido():
+    """Test para email inválido."""
+    assert validar_email('usuario@invalido') is False
+
+
+def test_obtener_usuarios(cliente):
+    """Test para obtener usuarios."""
+    respuesta = cliente.get('/usuarios')
+    assert respuesta.status_code == 200
+    assert len(respuesta.json) == 2
+
+
+def test_procesar_nombre():
+    """Test para procesamiento de nombres."""
+    assert procesar_nombre('juan perez') == 'Juan Perez'</code>
+            </div>
+        </div>
+
+        <h5>Pasos para Ejecutar</h5>
+
+        <ol>
+            <li><strong>Crea el virtual environment:</strong>
+                <div class="code-block">
+                    <button class="copy-btn" onclick="copiarCodigo(this)">Copiar</button>
+                    <code>python -m venv venv
+source venv/bin/activate  # En Windows: venv\Scripts\activate</code>
+                </div>
+            </li>
+            <li><strong>Instala dependencias:</strong>
+                <div class="code-block">
+                    <button class="copy-btn" onclick="copiarCodigo(this)">Copiar</button>
+                    <code>pip install -r requirements.txt</code>
+                </div>
+            </li>
+            <li><strong>Ejecuta los tests:</strong>
+                <div class="code-block">
+                    <button class="copy-btn" onclick="copiarCodigo(this)">Copiar</button>
+                    <code>pytest tests/</code>
+                </div>
+            </li>
+            <li><strong>Inicia la aplicación:</strong>
+                <div class="code-block">
+                    <button class="copy-btn" onclick="copiarCodigo(this)">Copiar</button>
+                    <code>python src/app.py</code>
+                </div>
+            </li>
+        </ol>
+
+        <h5>Salida Esperada</h5>
+
+        <div class="code-block">
+            <button class="copy-btn" onclick="copiarCodigo(this)">Copiar</button>
+            <code>$ pytest tests/
+===================== test session starts =======================
+collected 4 items
+
+tests/test_app.py::test_validar_email_valido PASSED       [ 25%]
+tests/test_app.py::test_validar_email_invalido PASSED     [ 50%]
+tests/test_app.py::test_obtener_usuarios PASSED           [ 75%]
+tests/test_app.py::test_procesar_nombre PASSED            [100%]
+
+===================== 4 passed in 0.15s ========================</code>
+        </div>
+
+    </section>
+
+    <!-- SECCIÓN 5: CONCLUSIONES -->
+    <section id="conclusiones">
+        <h2>5. Conclusiones y Recomendaciones</h2>
+
+        <h3>¿Cuál IDE Elegir?</h3>
+
+        <h4>Si eres Principiante</h4>
+        <ul>
+            <li><strong>Primera Opción:</strong> Google Colab (sin instalación) o VS Code (fácil de instalar)</li>
+            <li><strong>Por qué:</strong> Sin fricción inicial, interfaz simple, enorme comunidad</li>
+        </ul>
+
+        <h4>Si Eres Desarrollador Intermedio</h4>
+        <ul>
+            <li><strong>Primera Opción:</strong> Visual Studio Code con extensiones Python, Pylance, Black, Flake8</li>
+            <li><strong>Por qué:</strong> Potencia, flexibilidad, velocidad, comunidad activa</li>
+        </ul>
+
+        <h4>Si Eres Profesional</h4>
+        <ul>
+            <li><strong>Desarrollo Web:</strong> PyCharm Professional + VS Code para JavaScript</li>
+            <li><strong>Data Science:</strong> Anaconda + Jupyter + Google Colab para GPU gratis</li>
+        </ul>
+
+        <h3>Próximos Pasos</h3>
+
+        <ol>
+            <li>Instala tu IDE elegido</li>
+            <li>Instala las extensiones básicas (Python, Pylance, Black, Flake8)</li>
+            <li>Crea tu primer proyecto Python</li>
+            <li>Aprende Git y GitHub</li>
+            <li>Escribe tus primeros tests</li>
+        </ol>
+
+        <div class="info-box success" style="margin-top: 2rem;">
+            <strong>🎉 ¡Felicitaciones!</strong> Ahora tienes el conocimiento para elegir y configurar correctamente tu entorno de desarrollo Python. El siguiente paso es practicar constantemente. ¡Buena suerte!
+        </div>
+
+    </section>
+
+</div>
+
+<!-- FOOTER -->
+<footer>
+    <p><strong>Clase Completa: IDEs para Programación en Python</strong></p>
+    <p>Última actualización: Mayo 2026</p>
+    <p>Para preguntas: <a href="mailto:soporte@ejemplo.com">soporte@ejemplo.com</a></p>
+</footer>
+
+<script>
+    function copiarCodigo(boton) {
+        const bloque = boton.nextElementSibling;
+        const codigo = bloque.innerText;
+        
+        navigator.clipboard.writeText(codigo).then(() => {
+            const textoOriginal = boton.innerText;
+            boton.innerText = '✓ Copiado';
+            setTimeout(() => {
+                boton.innerText = textoOriginal;
+            }, 2000);
+        });
+    }
+
+    document.getElementById('navbarToggle').addEventListener('click', () => {
+        const menu = document.getElementById('navbarMenu');
+        menu.style.display = menu.style.display === 'none' ? 'flex' : 'none';
+    });
+
+    document.querySelectorAll('.navbar-menu a').forEach(link => {
+        link.addEventListener('click', () => {
+            if (window.innerWidth <= 768) {
+                document.getElementById('navbarMenu').style.display = 'none';
+            }
+        });
+    });
+</script>
+
+</body>
+</html>
