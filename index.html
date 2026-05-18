@@ -3,1293 +3,1273 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="description" content="Clase completa sobre IDEs para programación en Python">
-    <meta name="keywords" content="Python, IDE, Visual Studio Code, PyCharm, Jupyter, Colab">
-    <title>Clase: IDEs para Programación en Python</title>
+    <title>Clase: IDEs para Python + Git Básico</title>
     <style>
-        :root {
-            --color-primary: #0066cc;
-            --color-primary-dark: #004999;
-            --color-secondary: #6c757d;
-            --color-accent: #0099ff;
-            --color-success: #28a745;
-            --color-warning: #ffc107;
-            --color-danger: #dc3545;
-            --color-light: #f8f9fa;
-            --color-white: #ffffff;
-            --color-dark: #212529;
-            --color-border: #dee2e6;
-            --font-family-primary: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-            --spacing-unit: 1rem;
-            --transition: all 0.3s ease;
-        }
-
         * {
             margin: 0;
             padding: 0;
             box-sizing: border-box;
         }
 
-        html {
-            scroll-behavior: smooth;
-        }
-
         body {
-            font-family: var(--font-family-primary);
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
             line-height: 1.6;
-            color: var(--color-dark);
-            background-color: #f5f7fb;
+            color: #333;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+            padding: 20px;
         }
 
-        /* NAVEGACIÓN */
-        nav {
-            position: sticky;
-            top: 0;
-            z-index: 1000;
-            background-color: var(--color-white);
-            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
-        }
-
-        .navbar-container {
+        .container {
             max-width: 1200px;
             margin: 0 auto;
-            padding: var(--spacing-unit);
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            flex-wrap: wrap;
-            gap: 1rem;
+            background: white;
+            border-radius: 12px;
+            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
+            overflow: hidden;
         }
 
-        .navbar-brand {
-            font-size: 1.5rem;
-            font-weight: 700;
-            color: var(--color-primary);
-            text-decoration: none;
-        }
-
-        .navbar-menu {
-            display: flex;
-            list-style: none;
-            gap: 2rem;
-            flex-wrap: wrap;
-        }
-
-        .navbar-menu a {
-            color: var(--color-secondary);
-            text-decoration: none;
-            font-weight: 500;
-            transition: var(--transition);
-            font-size: 0.95rem;
-        }
-
-        .navbar-menu a:hover {
-            color: var(--color-primary);
-        }
-
-        .navbar-toggle {
-            display: none;
-            flex-direction: column;
-            cursor: pointer;
-            background: none;
-            border: none;
-        }
-
-        .navbar-toggle span {
-            width: 25px;
-            height: 3px;
-            background-color: var(--color-primary);
-            margin: 5px 0;
-            transition: var(--transition);
-        }
-
-        /* HEADER */
         header {
-            background: linear-gradient(135deg, var(--color-primary) 0%, var(--color-primary-dark) 100%);
-            color: var(--color-white);
-            padding: 4rem var(--spacing-unit) 3rem;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 40px 20px;
             text-align: center;
         }
 
         header h1 {
-            font-size: 2.5rem;
-            margin-bottom: 1rem;
-            font-weight: 700;
+            font-size: 2.5em;
+            margin-bottom: 10px;
         }
 
         header p {
-            font-size: 1.2rem;
-            opacity: 0.95;
-            max-width: 800px;
-            margin: 0 auto;
+            font-size: 1.1em;
+            opacity: 0.9;
         }
 
-        /* CONTENEDOR PRINCIPAL */
-        .container {
-            max-width: 1200px;
-            margin: 0 auto;
-            padding: 0 var(--spacing-unit);
+        nav {
+            background: #f8f9fa;
+            padding: 20px;
+            border-bottom: 2px solid #667eea;
+            display: flex;
+            gap: 15px;
+            flex-wrap: wrap;
+            justify-content: center;
         }
 
-        /* SECCIONES */
+        nav a {
+            display: inline-block;
+            padding: 10px 20px;
+            background: #667eea;
+            color: white;
+            text-decoration: none;
+            border-radius: 6px;
+            transition: background 0.3s;
+            font-weight: 500;
+        }
+
+        nav a:hover {
+            background: #764ba2;
+        }
+
+        main {
+            padding: 40px;
+        }
+
         section {
-            background-color: var(--color-white);
-            margin: 2rem 0;
-            padding: 3rem;
+            margin-bottom: 60px;
+            scroll-margin-top: 80px;
+        }
+
+        h2 {
+            font-size: 2em;
+            color: #667eea;
+            margin-bottom: 20px;
+            border-left: 5px solid #667eea;
+            padding-left: 15px;
+        }
+
+        h3 {
+            font-size: 1.5em;
+            color: #764ba2;
+            margin-top: 25px;
+            margin-bottom: 15px;
+        }
+
+        h4 {
+            font-size: 1.2em;
+            color: #667eea;
+            margin-top: 20px;
+            margin-bottom: 10px;
+        }
+
+        p {
+            margin-bottom: 15px;
+            text-align: justify;
+            font-size: 1.05em;
+        }
+
+        code {
+            background: #f4f4f4;
+            padding: 2px 6px;
+            border-radius: 4px;
+            font-family: 'Courier New', monospace;
+            color: #d63384;
+        }
+
+        pre {
+            background: #2d2d2d;
+            color: #f8f8f2;
+            padding: 20px;
             border-radius: 8px;
-            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
-        }
-
-        section h2 {
-            font-size: 2rem;
-            color: var(--color-primary);
-            margin-bottom: 1.5rem;
-            padding-bottom: 1rem;
-            border-bottom: 3px solid var(--color-accent);
-            display: inline-block;
-        }
-
-        section h3 {
-            font-size: 1.4rem;
-            color: var(--color-primary-dark);
-            margin-top: 2rem;
-            margin-bottom: 1rem;
-        }
-
-        section h4 {
-            font-size: 1.1rem;
-            color: var(--color-primary);
-            margin-top: 1.5rem;
-            margin-bottom: 0.8rem;
-        }
-
-        section h5 {
-            font-size: 1rem;
-            color: var(--color-primary-dark);
-            margin-top: 1rem;
-            margin-bottom: 0.5rem;
-        }
-
-        section p {
-            font-size: 1rem;
-            line-height: 1.8;
-            margin-bottom: 1rem;
-            color: #333;
-        }
-
-        section ul, section ol {
-            margin-left: 2rem;
-            margin-bottom: 1.5rem;
-        }
-
-        section li {
-            margin-bottom: 0.8rem;
-            font-size: 1rem;
-            line-height: 1.8;
-        }
-
-        /* TARJETAS IDE */
-        .ide-cards {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-            gap: 2rem;
-            margin: 2rem 0;
-        }
-
-        .ide-card {
-            background: linear-gradient(135deg, #f8f9fa 0%, #fff 100%);
-            border: 2px solid var(--color-border);
-            border-radius: 8px;
-            padding: 2rem;
-            transition: var(--transition);
-            cursor: pointer;
-        }
-
-        .ide-card:hover {
-            transform: translateY(-5px);
-            box-shadow: 0 8px 20px rgba(0, 102, 204, 0.15);
-            border-color: var(--color-primary);
-        }
-
-        .ide-card h4 {
-            font-size: 1.3rem;
-            color: var(--color-primary);
-            margin-bottom: 1rem;
-            margin-top: 0;
-        }
-
-        .ide-card p {
-            font-size: 0.95rem;
-            color: var(--color-secondary);
-            margin-bottom: 0.8rem;
-        }
-
-        .ide-card .badge {
-            display: inline-block;
-            background-color: var(--color-accent);
-            color: var(--color-white);
-            padding: 0.4rem 0.8rem;
-            border-radius: 20px;
-            font-size: 0.85rem;
-            margin-right: 0.5rem;
-            margin-bottom: 1rem;
-        }
-
-        /* TABLA COMPARATIVA */
-        .table-wrapper {
             overflow-x: auto;
-            margin: 2rem 0;
+            margin: 20px 0;
+            font-size: 0.95em;
+            line-height: 1.4;
+        }
+
+        pre code {
+            background: none;
+            color: #f8f8f2;
+            padding: 0;
         }
 
         table {
             width: 100%;
             border-collapse: collapse;
-            background-color: var(--color-white);
-            border-radius: 8px;
-            overflow: hidden;
+            margin: 20px 0;
+            background: white;
         }
 
-        table thead {
-            background-color: var(--color-primary);
-            color: var(--color-white);
+        table th, table td {
+            border: 1px solid #ddd;
+            padding: 12px;
+            text-align: left;
         }
 
         table th {
-            padding: 1.2rem;
-            text-align: left;
-            font-weight: 600;
-            border: none;
+            background: #667eea;
+            color: white;
+            font-weight: bold;
         }
 
-        table td {
-            padding: 1rem 1.2rem;
-            border-bottom: 1px solid var(--color-border);
+        table tr:nth-child(even) {
+            background: #f9f9f9;
         }
 
-        table tbody tr:hover {
-            background-color: #f0f4ff;
+        table tr:hover {
+            background: #f0f0f0;
         }
 
-        table tbody tr:nth-child(even) {
-            background-color: #fafbfc;
+        ul, ol {
+            margin: 20px 0 20px 30px;
         }
 
-        /* CAJAS DE INFORMACIÓN */
-        .info-box {
-            background-color: #e7f3ff;
-            border-left: 4px solid var(--color-primary);
-            padding: 1.5rem;
-            margin: 1.5rem 0;
-            border-radius: 4px;
-        }
-
-        .info-box.warning {
-            background-color: #fff3cd;
-            border-left-color: var(--color-warning);
-        }
-
-        .info-box.success {
-            background-color: #d4edda;
-            border-left-color: var(--color-success);
-        }
-
-        .info-box strong {
-            color: var(--color-primary);
-        }
-
-        .info-box.warning strong {
-            color: #856404;
-        }
-
-        .info-box.success strong {
-            color: #155724;
-        }
-
-        /* CÓDIGO MEJORADO */
-        .code-block {
-            background-color: #1e1e1e;
-            color: #d4d4d4;
-            padding: 1.5rem;
-            border-radius: 6px;
-            overflow-x: auto;
-            margin: 1.5rem 0;
-            font-family: 'Courier New', Consolas, monospace;
-            font-size: 0.9rem;
-            line-height: 1.6;
-            position: relative;
-            border: 1px solid #333;
-        }
-
-        .code-block code {
-            display: block;
-            white-space: pre-wrap;
-            word-wrap: break-word;
-            word-break: break-word;
-        }
-
-        .copy-btn {
-            position: absolute;
-            top: 0.75rem;
-            right: 0.75rem;
-            background-color: var(--color-accent);
-            color: var(--color-white);
-            border: none;
-            padding: 0.5rem 1rem;
-            border-radius: 4px;
-            cursor: pointer;
-            font-size: 0.85rem;
-            transition: var(--transition);
-            z-index: 10;
-        }
-
-        .copy-btn:hover {
-            background-color: var(--color-primary);
-        }
-
-        /* ESTRUCTURA DEL PROYECTO */
-        .project-structure {
-            background-color: #1e1e1e;
-            color: #d4d4d4;
-            border: 1px solid #333;
-            border-radius: 6px;
-            padding: 1.5rem;
-            margin: 1.5rem 0;
-            font-family: 'Courier New', Consolas, monospace;
-            font-size: 0.9rem;
-            line-height: 1.8;
-            overflow-x: auto;
-        }
-
-        .project-structure strong {
-            color: #4ec9b0;
-            font-weight: 600;
-        }
-
-        .project-structure div {
-            display: block;
-            margin: 0.2rem 0;
-            white-space: pre;
-        }
-
-        /* TARJETA DE ARCHIVO */
-        .file-card {
-            background-color: #f5f5f5;
-            border: 1px solid var(--color-border);
-            border-radius: 6px;
-            padding: 1rem;
-            margin: 1.5rem 0;
-            overflow: hidden;
-        }
-
-        .file-card-title {
-            background-color: #e8e8e8;
-            padding: 0.8rem 1rem;
-            margin: -1rem -1rem 1rem -1rem;
-            font-weight: 600;
-            color: var(--color-primary);
-            font-family: 'Courier New', Consolas, monospace;
-            font-size: 0.9rem;
-            border-bottom: 2px solid var(--color-accent);
-        }
-
-        /* EXTENSIONES */
-        .extension-item {
-            background-color: #f8f9fa;
-            border: 1px solid var(--color-border);
-            border-radius: 8px;
-            padding: 1.5rem;
-            margin-bottom: 2rem;
-            transition: var(--transition);
-        }
-
-        .extension-item:hover {
-            box-shadow: 0 4px 12px rgba(0, 102, 204, 0.1);
-        }
-
-        .extension-header {
-            display: flex;
-            justify-content: space-between;
-            align-items: start;
-            margin-bottom: 1rem;
-            flex-wrap: wrap;
-            gap: 1rem;
-        }
-
-        .extension-title {
-            font-size: 1.3rem;
-            font-weight: 600;
-            color: var(--color-primary);
-        }
-
-        .extension-dev {
-            font-size: 0.9rem;
-            color: var(--color-secondary);
-            font-style: italic;
-        }
-
-        .extension-badge {
-            background-color: var(--color-primary);
-            color: var(--color-white);
-            padding: 0.4rem 0.8rem;
-            border-radius: 4px;
-            font-size: 0.85rem;
-            font-weight: 600;
-        }
-
-        .extension-content h5 {
-            font-size: 1.05rem;
-            color: var(--color-primary-dark);
-            margin-top: 1rem;
-            margin-bottom: 0.5rem;
-        }
-
-        .extension-content p, .extension-content ul {
-            font-size: 0.95rem;
-            margin-bottom: 0.8rem;
-        }
-
-        /* BOTONES */
-        .btn {
-            display: inline-block;
-            padding: 0.75rem 1.5rem;
-            border-radius: 4px;
-            text-decoration: none;
-            font-weight: 600;
-            transition: var(--transition);
-            border: none;
-            cursor: pointer;
-            font-size: 0.95rem;
-        }
-
-        .btn-primary {
-            background-color: var(--color-primary);
-            color: var(--color-white);
-        }
-
-        .btn-primary:hover {
-            background-color: var(--color-primary-dark);
-            transform: translateY(-2px);
-        }
-
-        /* ÍNDICE */
-        .table-of-contents {
-            background-color: #f0f4ff;
-            border: 2px solid var(--color-primary);
-            border-radius: 8px;
-            padding: 2rem;
-            margin: 2rem 0;
-        }
-
-        .table-of-contents h3 {
-            margin-top: 0;
-            color: var(--color-primary);
-        }
-
-        .table-of-contents ol {
-            margin-left: 1.5rem;
-        }
-
-        .table-of-contents a {
-            color: var(--color-primary);
-            text-decoration: none;
-            transition: var(--transition);
-        }
-
-        .table-of-contents a:hover {
-            text-decoration: underline;
-            color: var(--color-primary-dark);
-        }
-        /* ESTRUCTURA DEL PROYECTO - MEJORADO */
-    .project-structure {
-        background-color: #1e1e1e;
-        color: #d4d4d4;
-        border: 1px solid #333;
-        border-radius: 6px;
-        padding: 1.5rem;
-        margin: 1.5rem 0;
-        font-family: 'Courier New', Consolas, monospace;
-        font-size: 0.9rem;
-        line-height: 1.8;
-        overflow-x: auto;
-        white-space: pre;
-    }
-
-    .project-structure strong {
-        color: #4ec9b0;
-        font-weight: 600;
-    }
-
-    .tree-line {
-        color: #808080;
-    }
-
-    .tree-folder {
-        color: #d4d4d4;
-    }
-
-    .tree-file {
-        color: #ce9178;
-    }
-
-        /* FOOTER */
-        footer {
-            background-color: var(--color-dark);
-            color: var(--color-white);
-            text-align: center;
-            padding: 2rem;
-            margin-top: 3rem;
-        }
-
-        footer p {
-            margin: 0.5rem 0;
-            font-size: 0.95rem;
-        }
-
-        footer a {
-            color: var(--color-accent);
-            text-decoration: none;
-        }
-
-        footer a:hover {
-            text-decoration: underline;
-        }
-
-        /* RESPONSIVE */
-        @media (max-width: 768px) {
-            header h1 {
-                font-size: 1.8rem;
-            }
-
-            header p {
-                font-size: 1rem;
-            }
-
-            section {
-                padding: 1.5rem;
-                margin: 1rem 0;
-            }
-
-            section h2 {
-                font-size: 1.5rem;
-            }
-
-            section h3 {
-                font-size: 1.1rem;
-            }
-
-            .navbar-menu {
-                gap: 1rem;
-                font-size: 0.9rem;
-            }
-
-            .navbar-toggle {
-                display: flex;
-            }
-
-            table {
-                font-size: 0.9rem;
-            }
-
-            table th, table td {
-                padding: 0.75rem;
-            }
-
-            .ide-cards {
-                grid-template-columns: 1fr;
-            }
-
-            .extension-header {
-                flex-direction: column;
-            }
-
-            .table-of-contents {
-                padding: 1.5rem;
-            }
-
-            .code-block {
-                font-size: 0.85rem;
-            }
-
-            .project-structure {
-                font-size: 0.85rem;
-            }
-        }
-
-        @media (max-width: 480px) {
-            html {
-                font-size: 14px;
-            }
-
-            header h1 {
-                font-size: 1.5rem;
-            }
-
-            section {
-                padding: 1rem;
-            }
-
-            section h2 {
-                font-size: 1.3rem;
-            }
-
-            .navbar-container {
-                padding: 0.75rem;
-            }
-
-            .navbar-brand {
-                font-size: 1.2rem;
-            }
-
-            body {
-                font-size: 0.95rem;
-            }
-        }
-
-        /* UTILIDADES */
-        .text-center {
-            text-align: center;
-        }
-
-        .mt-3 {
-            margin-top: 2rem;
-        }
-
-        .mb-3 {
-            margin-bottom: 2rem;
+        li {
+            margin-bottom: 10px;
+            font-size: 1.05em;
         }
 
         .highlight {
-            background-color: #fff3cd;
-            padding: 0.2rem 0.4rem;
-            border-radius: 3px;
+            background: #fff3cd;
+            border-left: 4px solid #ffc107;
+            padding: 15px;
+            margin: 20px 0;
+            border-radius: 4px;
+        }
+
+        .info-box {
+            background: #e7f3ff;
+            border-left: 4px solid #2196F3;
+            padding: 15px;
+            margin: 20px 0;
+            border-radius: 4px;
+        }
+
+        .danger-box {
+            background: #ffebee;
+            border-left: 4px solid #f44336;
+            padding: 15px;
+            margin: 20px 0;
+            border-radius: 4px;
+        }
+
+        .success-box {
+            background: #e8f5e9;
+            border-left: 4px solid #4caf50;
+            padding: 15px;
+            margin: 20px 0;
+            border-radius: 4px;
+        }
+
+        .grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 20px;
+            margin: 20px 0;
+        }
+
+        .card {
+            background: #f9f9f9;
+            border: 1px solid #ddd;
+            border-radius: 8px;
+            padding: 20px;
+            transition: transform 0.3s, box-shadow 0.3s;
+        }
+
+        .card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
+        }
+
+        .card h4 {
+            color: #667eea;
+            margin-bottom: 10px;
+        }
+
+        footer {
+            background: #f8f9fa;
+            padding: 20px;
+            text-align: center;
+            border-top: 2px solid #667eea;
+            color: #666;
+        }
+
+        a {
+            color: #667eea;
+            text-decoration: none;
+        }
+
+        a:hover {
+            text-decoration: underline;
+        }
+
+        .ascii-diagram {
+            background: #2d2d2d;
+            color: #00ff00;
+            padding: 15px;
+            border-radius: 8px;
+            overflow-x: auto;
+            font-family: 'Courier New', monospace;
+            font-size: 0.9em;
+            line-height: 1.4;
+            margin: 20px 0;
+        }
+
+        @media (max-width: 768px) {
+            header h1 {
+                font-size: 1.8em;
+            }
+
+            h2 {
+                font-size: 1.5em;
+            }
+
+            h3 {
+                font-size: 1.2em;
+            }
+
+            main {
+                padding: 20px;
+            }
+
+            nav {
+                flex-direction: column;
+            }
+
+            nav a {
+                width: 100%;
+                text-align: center;
+            }
+
+            .grid {
+                grid-template-columns: 1fr;
+            }
         }
     </style>
 </head>
 <body>
+    <div class="container">
+        <header>
+            <h1>🚀 IDEs para Python + Git Básico</h1>
+            <p>Guía Simplificada 2026</p>
+        </header>
 
-<!-- NAVEGACIÓN -->
-<nav>
-    <div class="navbar-container">
-        <a href="#" class="navbar-brand">🐍 IDEs Python</a>
-        <button class="navbar-toggle" id="navbarToggle">
-            <span></span>
-            <span></span>
-            <span></span>
-        </button>
-        <ul class="navbar-menu" id="navbarMenu">
-            <li><a href="#introduccion">Introducción</a></li>
-            <li><a href="#ides">IDEs</a></li>
-            <li><a href="#comparativa">Comparativa</a></li>
-            <li><a href="#vscode">VS Code</a></li>
-            <li><a href="#conclusiones">Conclusiones</a></li>
-        </ul>
-    </div>
-</nav>
+        <nav>
+            <a href="#introduccion">Introducción</a>
+            <a href="#ides-principales">IDEs</a>
+            <a href="#vscode">VS Code</a>
+            <a href="#extensiones">Extensiones</a>
+            <a href="#proyecto-python">Proyecto</a>
+            <a href="#git-intro">Git Intro</a>
+            <a href="#git-basico">Git Básico</a>
+            <a href="#git-ramas">Ramas</a>
+            <a href="#github">GitHub</a>
+            <a href="#conclusiones">Conclusiones</a>
+        </nav>
 
-<!-- HEADER -->
-<header>
-    <h1>IDEs para Programación en Python</h1>
-    <p>Una guía completa para elegir, instalar y configurar tu entorno de desarrollo ideal</p>
-</header>
+        <main>
+            <!-- SECCIÓN 1: INTRODUCCIÓN -->
+            <section id="introduccion">
+                <h2>1. Introducción a los IDEs</h2>
 
-<div class="container">
+                <p>Un <strong>IDE (Entorno Integrado de Desarrollo)</strong> es un programa que combina un editor de código, depurador, terminal y otras herramientas en un solo lugar. Es mucho mejor que escribir en Notepad porque te ayuda a escribir código sin errores.</p>
 
-    <!-- TABLA DE CONTENIDOS -->
-    <section class="table-of-contents">
-        <h3>📑 Tabla de Contenidos</h3>
-        <ol>
-            <li><a href="#introduccion">Introducción a IDEs</a></li>
-            <li><a href="#ides">Los 4 IDEs Principales</a></li>
-            <li><a href="#comparativa">Tabla Comparativa</a></li>
-            <li><a href="#vscode">Visual Studio Code - Guía Completa</a></li>
-            <li><a href="#extensiones">Las 10 Extensiones Imprescindibles</a></li>
-            <li><a href="#ejemplo">Ejemplo Práctico</a></li>
-            <li><a href="#conclusiones">Conclusiones y Recomendaciones</a></li>
-        </ol>
-    </section>
+                <h3>¿Qué incluye un IDE?</h3>
+                <ul>
+                    <li><strong>Editor:</strong> Resaltado de colores, autocompletado</li>
+                    <li><strong>Depurador:</strong> Buscar errores en tu código</li>
+                    <li><strong>Terminal:</strong> Ejecutar comandos sin salir del programa</li>
+                    <li><strong>Extensiones:</strong> Agregar funcionalidades extra</li>
+                    <li><strong>Control de versiones:</strong> Rastrear cambios con Git</li>
+                </ul>
 
-    <!-- SECCIÓN 1: INTRODUCCIÓN -->
-    <section id="introduccion">
-        <h2>1. Introducción a IDEs</h2>
-
-        <h3>¿Qué es un IDE?</h3>
-        <p>
-            Un <span class="highlight">IDE (Integrated Development Environment)</span> o <strong>Entorno Integrado de Desarrollo</strong> es una aplicación que proporciona herramientas necesarias para escribir, compilar, depurar y ejecutar código de forma eficiente. A diferencia de un editor de texto simple, un IDE integra múltiples funcionalidades en una única interfaz.
-        </p>
-
-        <h3>Componentes Básicos de un IDE</h3>
-        <ul>
-            <li><strong>Editor de Código:</strong> Resaltado de sintaxis, autocompletado y navegación inteligente</li>
-            <li><strong>Compilador/Intérprete:</strong> Ejecuta y prueba tu código</li>
-            <li><strong>Depurador:</strong> Permite identificar y corregir errores paso a paso</li>
-            <li><strong>Control de Versiones:</strong> Integración con Git para gestionar cambios</li>
-            <li><strong>Gestor de Paquetes:</strong> Instala y administra librerías externas</li>
-            <li><strong>Terminal Integrada:</strong> Ejecuta comandos sin abandonar el IDE</li>
-            <li><strong>Extensiones/Plugins:</strong> Amplía funcionalidades según tus necesidades</li>
-        </ul>
-
-        <h3>IDE vs Editor de Texto: ¿Cuál es la Diferencia?</h3>
-        <p>
-            Si bien ambos permiten escribir código, los IDEs ofrecen características avanzadas que agilizan el desarrollo:
-        </p>
-        <div class="table-wrapper">
-            <table>
-                <thead>
+                <h3>IDEs vs Editor de texto</h3>
+                <table>
                     <tr>
-                        <th>Aspecto</th>
-                        <th>Editor de Texto</th>
+                        <th>Característica</th>
                         <th>IDE</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    <tr>
-                        <td>Resaltado de Sintaxis</td>
-                        <td>Sí</td>
-                        <td>Sí (Avanzado)</td>
+                        <th>Editor (VS Code, Sublime)</th>
                     </tr>
                     <tr>
                         <td>Autocompletado</td>
-                        <td>Limitado</td>
-                        <td>Muy avanzado</td>
+                        <td>✓ Inteligente</td>
+                        <td>✓ Básico</td>
                     </tr>
                     <tr>
                         <td>Depuración</td>
-                        <td>No</td>
-                        <td>Sí, integrada</td>
+                        <td>✓ Integrada</td>
+                        <td>✗ Necesita plugins</td>
                     </tr>
                     <tr>
-                        <td>Control de Versiones</td>
-                        <td>No</td>
-                        <td>Integrado</td>
+                        <td>Peso (memoria)</td>
+                        <td>Pesado (500 MB+)</td>
+                        <td>Ligero (100-200 MB)</td>
                     </tr>
                     <tr>
-                        <td>Terminal Integrada</td>
-                        <td>No</td>
-                        <td>Sí</td>
+                        <td>Velocidad de inicio</td>
+                        <td>Lenta (5-10s)</td>
+                        <td>Rápida (&lt;2s)</td>
                     </tr>
                     <tr>
-                        <td>Extensiones</td>
-                        <td>Limitadas</td>
-                        <td>Amplias</td>
+                        <td>Costo</td>
+                        <td>Varía</td>
+                        <td>Gratuito</td>
+                    </tr>
+                </table>
+            </section>
+
+            <!-- SECCIÓN 2: IDEs PRINCIPALES -->
+            <section id="ides-principales">
+                <h2>2. IDEs Principales para Python</h2>
+
+                <h3>Comparativa simple</h3>
+                <table>
+                    <tr>
+                        <th>IDE</th>
+                        <th>Precio</th>
+                        <th>Fácil de usar</th>
+                        <th>Mejor para</th>
                     </tr>
                     <tr>
-                        <td>Curva de Aprendizaje</td>
-                        <td>Muy suave</td>
-                        <td>Moderada</td>
+                        <td><strong>Visual Studio Code</strong></td>
+                        <td>Gratis</td>
+                        <td>⭐⭐⭐⭐⭐</td>
+                        <td>Desarrollo general (RECOMENDADO)</td>
                     </tr>
-                </tbody>
-            </table>
-        </div>
-
-        <h3>Criterios para Elegir un IDE</h3>
-        <ul>
-            <li><strong>Nivel de Experiencia:</strong> Principiantes vs desarrolladores avanzados</li>
-            <li><strong>Tipo de Proyecto:</strong> Scripts simples, aplicaciones web, ciencia de datos, etc.</li>
-            <li><strong>Rendimiento:</strong> Consumo de recursos (RAM, CPU)</li>
-            <li><strong>Curva de Aprendizaje:</strong> Facilidad de uso y documentación</li>
-            <li><strong>Costo:</strong> Gratuito o de pago</li>
-            <li><strong>Compatibilidad:</strong> Sistema operativo (Windows, macOS, Linux)</li>
-            <li><strong>Comunidad:</strong> Soporte y cantidad de extensiones disponibles</li>
-            <li><strong>Funcionalidades Específicas:</strong> Depuración avanzada, análisis estático, etc.</li>
-        </ul>
-
-        <div class="info-box">
-            <strong>💡 Consejo:</strong> No existe un IDE "perfecto". La mejor opción depende de tus necesidades específicas y preferencias personales.
-        </div>
-    </section>
-
-    <!-- SECCIÓN 2: LOS 4 IDEs PRINCIPALES -->
-    <section id="ides">
-        <h2>2. Los 4 IDEs Principales para Python</h2>
-
-        <div class="ide-cards">
-            <!-- VS CODE -->
-            <div class="ide-card">
-                <h4>Visual Studio Code</h4>
-                <div class="badge">Recomendado</div>
-                <p><strong>Licencia:</strong> Gratuito</p>
-                <p><strong>Plataforma:</strong> Windows, macOS, Linux</p>
-                <p>Editor ultraligero y altamente personalizable con excelente soporte para Python.</p>
-                <a href="#vscode" class="btn btn-primary" style="margin-top: 1rem;">Ver Detalles</a>
-            </div>
-
-            <!-- PyCharm -->
-            <div class="ide-card">
-                <h4>PyCharm</h4>
-                <div class="badge">Profesional</div>
-                <p><strong>Licencia:</strong> Community (Gratuita) / Professional (Pago)</p>
-                <p><strong>Plataforma:</strong> Windows, macOS, Linux</p>
-                <p>IDE especializado en Python con herramientas poderosas para desarrollo profesional.</p>
-            </div>
-
-            <!-- Google Colab -->
-            <div class="ide-card">
-                <h4>Google Colab</h4>
-                <div class="badge">Cloud</div>
-                <p><strong>Licencia:</strong> Gratuito</p>
-                <p><strong>Plataforma:</strong> Basado en navegador</p>
-                <p>Entorno Jupyter en la nube, ideal para ciencia de datos y Machine Learning.</p>
-            </div>
-
-            <!-- Anaconda + Jupyter -->
-            <div class="ide-card">
-                <h4>Anaconda + Jupyter</h4>
-                <div class="badge">Data Science</div>
-                <p><strong>Licencia:</strong> Gratuito</p>
-                <p><strong>Plataforma:</strong> Windows, macOS, Linux</p>
-                <p>Suite completa para ciencia de datos con Jupyter Notebook preinstalado.</p>
-            </div>
-        </div>
-
-        <!-- VISUAL STUDIO CODE -->
-        <div style="margin-top: 3rem;">
-            <h3>🔹 Visual Studio Code (VS Code)</h3>
-
-            <h4>Definición y Propósito</h4>
-            <p>
-                Visual Studio Code es un editor de código fuente ligero pero potente desarrollado por Microsoft. Aunque técnicamente es un editor de texto avanzado, su ecosistema de extensiones lo convierte en un IDE completo para Python y muchos otros lenguajes.
-            </p>
-
-            <h4>Historia y Versión Actual</h4>
-            <p>
-                VS Code fue lanzado en 2015 y se ha convertido en uno de los editores más populares del mundo. En 2026, cuenta con millones de descargas mensuales y una comunidad muy activa. Su arquitectura modular permite a los desarrolladores personalizarlo completamente.
-            </p>
-
-            <h4>Requisitos del Sistema</h4>
-            <ul>
-                <li>Windows: Windows 7 o superior, 1.6 GHz mínimo</li>
-                <li>macOS: macOS 10.11 (El Capitan) o superior</li>
-                <li>Linux: GLIBC 2.17 o superior</li>
-                <li>RAM mínima recomendada: 2 GB</li>
-                <li>Espacio en disco: ~200 MB</li>
-            </ul>
-
-            <h4>Guía de Instalación</h4>
-            <ol>
-                <li><strong>Descarga:</strong> Visita <a href="https://code.visualstudio.com" target="_blank">https://code.visualstudio.com</a></li>
-                <li><strong>Selecciona tu Sistema Operativo:</strong> Windows, macOS o Linux</li>
-                <li><strong>Ejecuta el instalador:</strong> Haz doble clic en el archivo descargado</li>
-                <li><strong>Sigue los pasos del instalador:</strong> Acepta los términos y condiciones</li>
-                <li><strong>Finaliza la instalación:</strong> VS Code se abrirá automáticamente</li>
-            </ol>
-
-            <div class="info-box">
-                <strong>✅ Verificación:</strong> Abre la terminal y ejecuta: <code>code --version</code>
-            </div>
-
-            <h4>Enlaces Oficiales</h4>
-            <ul>
-                <li><strong>Sitio Oficial:</strong> <a href="https://code.visualstudio.com" target="_blank">https://code.visualstudio.com</a></li>
-                <li><strong>Documentación:</strong> <a href="https://code.visualstudio.com/docs" target="_blank">https://code.visualstudio.com/docs</a></li>
-                <li><strong>Marketplace de Extensiones:</strong> <a href="https://marketplace.visualstudio.com" target="_blank">https://marketplace.visualstudio.com</a></li>
-                <li><strong>GitHub:</strong> <a href="https://github.com/microsoft/vscode" target="_blank">https://github.com/microsoft/vscode</a></li>
-            </ul>
-
-            <h4>Características Únicas</h4>
-            <ul>
-                <li>IntelliSense: Autocompletado ultra inteligente</li>
-                <li>Debugging integrado: Depurador paso a paso</li>
-                <li>Control de Git nativo: Gestiona repositorios sin salir del editor</li>
-                <li>Terminal integrada: Ejecuta comandos sin abrir consola</li>
-                <li>Marketplace de extensiones: Miles de plugins disponibles</li>
-                <li>Sincronización en la nube: Sincroniza configuración entre dispositivos</li>
-                <li>Live Share: Colabora con otros desarrolladores en tiempo real</li>
-            </ul>
-        </div>
-
-        <!-- PyCharm -->
-        <div style="margin-top: 3rem;">
-            <h3>🔹 PyCharm</h3>
-
-            <h4>Definición y Propósito</h4>
-            <p>
-                PyCharm es un IDE completo y especializado en Python, desarrollado por JetBrains. Es un entorno profesional con características avanzadas para desarrollo de aplicaciones Python a nivel empresarial.
-            </p>
-
-            <h4>Historia y Versión Actual</h4>
-            <p>
-                PyCharm fue lanzado en 2010 y se ha consolidado como el IDE número uno para Python en entornos profesionales. La versión Community Edition es gratuita, mientras que PyCharm Professional ofrece características adicionales. En 2026, cuenta con soporte completo para las últimas características de Python 3.14+.
-            </p>
-
-            <h4>Requisitos del Sistema</h4>
-            <ul>
-                <li>Windows: Windows 8 o superior</li>
-                <li>macOS: macOS 10.13 o superior</li>
-                <li>Linux: GLIBC 2.17 o superior</li>
-                <li>RAM recomendada: 4 GB mínimo, 8 GB ideal</li>
-                <li>Espacio en disco: ~2.5 GB</li>
-                <li>Java: JRE 11 o superior (incluido en el instalador)</li>
-            </ul>
-
-            <h4>Guía de Instalación</h4>
-            <ol>
-                <li><strong>Descarga:</strong> Visita <a href="https://www.jetbrains.com/pycharm" target="_blank">https://www.jetbrains.com/pycharm</a></li>
-                <li><strong>Elige la versión:</strong> Community (gratuita) o Professional (pago)</li>
-                <li><strong>Descarga según tu SO:</strong> Windows, macOS o Linux</li>
-                <li><strong>Ejecuta el instalador:</strong> Haz doble clic en el archivo</li>
-                <li><strong>Sigue los pasos:</strong> Acepta licencias y configura opciones</li>
-                <li><strong>Abre PyCharm:</strong> Se abrirá el asistente de configuración inicial</li>
-            </ol>
-        </div>
-
-        <!-- Google Colab -->
-        <div style="margin-top: 3rem;">
-            <h3>🔹 Google Colab</h3>
-
-            <h4>Definición y Propósito</h4>
-            <p>
-                Google Colab (Colaboratory) es un servicio basado en la nube que proporciona cuadernos Jupyter gratuitos. Permite escribir y ejecutar código Python directamente en el navegador sin necesidad de instalar nada.
-            </p>
-
-            <h4>Requisitos del Sistema</h4>
-            <ul>
-                <li>Navegador web moderno (Chrome, Firefox, Safari, Edge)</li>
-                <li>Conexión a Internet estable</li>
-                <li>Cuenta de Google gratuita</li>
-                <li>Sin requisitos locales de instalación</li>
-            </ul>
-
-            <h4>Acceso</h4>
-            <p>
-                Simplemente visita <a href="https://colab.research.google.com" target="_blank">https://colab.research.google.com</a>, inicia sesión con tu cuenta de Google y comienza a crear notebooks.
-            </p>
-        </div>
-
-        <!-- Anaconda + Jupyter -->
-        <div style="margin-top: 3rem;">
-            <h3>🔹 Anaconda + Jupyter Notebook</h3>
-
-            <h4>Definición y Propósito</h4>
-            <p>
-                Anaconda es una distribución Python gratuita que incluye más de 1,500 paquetes científicos preinstalados. Jupyter Notebook es un entorno web interactivo para ejecutar código Python en "celdas".
-            </p>
-
-            <h4>Descarga e Instalación</h4>
-            <p>
-                Descarga desde <a href="https://www.anaconda.com/download" target="_blank">https://www.anaconda.com/download</a>, elige Python 3.14, ejecuta el instalador y sigue los pasos.
-            </p>
-
-            <h4>Iniciar Jupyter</h4>
-            <div class="code-block">
-                <button class="copy-btn" onclick="copiarCodigo(this)">Copiar</button>
-                <code>jupyter notebook</code>
-            </div>
-        </div>
-
-    </section>
-
-    <!-- SECCIÓN 4: VISUAL STUDIO CODE - EJEMPLO PRÁCTICO -->
-    <section id="ejemplo">
-        <h2>4. Ejemplo Práctico Completo</h2>
-
-        <h3>Proyecto de Ejemplo: API Simple con Flask</h3>
-
-        <p>Vamos a crear un proyecto completo donde veremos cómo todas las extensiones trabajan juntas para mejorar la calidad del código.</p>
-
-        <h4>Estructura del Proyecto</h4>
-
-        <div class="project-structure">
-<strong>proyecto_api/</strong>
-<!-- ESTRUCTURA DEL PROYECTO MEJORADA -->
-<div class="project-structure"><strong>proyecto_api/</strong>
-├── <span class="tree-folder">src/</span>
-│   ├── <span class="tree-file">__init__.py</span>
-│   ├── <span class="tree-file">app.py</span>
-│   └── <span class="tree-folder">utils/</span>
-│       ├── <span class="tree-file">__init__.py</span>
-│       └── <span class="tree-file">helpers.py</span>
-├── <span class="tree-folder">tests/</span>
-│   ├── <span class="tree-file">__init__.py</span>
-│   └── <span class="tree-file">test_app.py</span>
-├── <span class="tree-file">requirements.txt</span>
-├── <span class="tree-file">.flake8</span>
-└── <span class="tree-file">.gitignore</span></div>
-        </div>
-
-        <div class="info-box">
-            <strong>📂 Explicación:</strong> src/ contiene el código, tests/ los tests, requirements.txt lista las dependencias.
-        </div>
-
-        <h4>Archivo: requirements.txt</h4>
-
-        <div class="file-card">
-            <div class="file-card-title">📄 requirements.txt</div>
-            <div class="code-block">
-                <button class="copy-btn" onclick="copiarCodigo(this)">Copiar</button>
-                <code>Flask==3.1.3
-pytest==9.0.3
-pytest-cov==4.1.0</code>
-            </div>
-        </div>
-
-        <h4>Archivo: .flake8</h4>
-
-        <div class="file-card">
-            <div class="file-card-title">📄 .flake8</div>
-            <div class="code-block">
-                <button class="copy-btn" onclick="copiarCodigo(this)">Copiar</button>
-                <code>[flake8]
-max-line-length = 100
-exclude = .git,__pycache__,venv
-ignore = E203, W503</code>
-            </div>
-        </div>
-
-        <h4>Archivo: src/__init__.py</h4>
-
-        <div class="file-card">
-            <div class="file-card-title">🐍 src/__init__.py</div>
-            <div class="code-block">
-                <button class="copy-btn" onclick="copiarCodigo(this)">Copiar</button>
-                <code>"""Inicializador del paquete src"""
-__version__ = "1.0.0"</code>
-            </div>
-        </div>
-
-        <h4>Archivo: src/app.py</h4>
-
-        <div class="file-card">
-            <div class="file-card-title">🐍 src/app.py</div>
-            <div class="code-block">
-                <button class="copy-btn" onclick="copiarCodigo(this)">Copiar</button>
-                <code>from flask import Flask, jsonify, request
-from src.utils.helpers import validar_email
-
-app = Flask(__name__)
-
-# ! Importante: Esta es la aplicación principal
-
-
-@app.route('/usuarios', methods=['GET'])
-def obtener_usuarios():
-    """Obtiene lista de todos los usuarios."""
-    usuarios = [
-        {'id': 1, 'nombre': 'Juan', 'email': 'juan@example.com'},
-        {'id': 2, 'nombre': 'María', 'email': 'maria@example.com'},
-    ]
-    return jsonify(usuarios)
-
-
-@app.route('/usuarios', methods=['POST'])
-def crear_usuario():
-    """Crea un nuevo usuario con validación."""
-    datos = request.get_json()
-
-    if not validar_email(datos.get('email')):
-        return jsonify({'error': 'Email inválido'}), 400
-
-    nuevo_usuario = {
-        'id': 3,
-        'nombre': datos.get('nombre'),
-        'email': datos.get('email')
-    }
-
-    return jsonify(nuevo_usuario), 201
-
-
-if __name__ == '__main__':
-    app.run(debug=True)</code>
-            </div>
-        </div>
-
-        <h4>Archivo: src/utils/helpers.py</h4>
-
-        <div class="file-card">
-            <div class="file-card-title">🐍 src/utils/helpers.py</div>
-            <div class="code-block">
-                <button class="copy-btn" onclick="copiarCodigo(this)">Copiar</button>
-                <code>import re
-from typing import Optional
-
-# * Funciones de utilidad reutilizables
-
-
-def validar_email(email: str) -> bool:
-    """
-    Valida formato de email.
-
-    Args:
-        email: String con dirección de email
-
-    Returns:
-        True si email es válido, False en caso contrario
-    """
-    patron = r'^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$'
-    return re.match(patron, email) is not None
-
-
-def procesar_nombre(nombre: str) -> str:
-    """Convierte nombre a formato título."""
-    return nombre.title().strip()</code>
-            </div>
-        </div>
-
-        <h4>Archivo: tests/test_app.py</h4>
-
-        <div class="file-card">
-            <div class="file-card-title">🧪 tests/test_app.py</div>
-            <div class="code-block">
-                <button class="copy-btn" onclick="copiarCodigo(this)">Copiar</button>
-                <code>import pytest
-from src.app import app
-from src.utils.helpers import validar_email, procesar_nombre
-
-
-@pytest.fixture
-def cliente():
-    """Cliente de prueba para la app."""
-    app.config['TESTING'] = True
-    with app.test_client() as cliente:
-        yield cliente
-
-
-def test_validar_email_valido():
-    """Test para email válido."""
-    assert validar_email('usuario@example.com') is True
-
-
-def test_validar_email_invalido():
-    """Test para email inválido."""
-    assert validar_email('usuario@invalido') is False
-
-
-def test_obtener_usuarios(cliente):
-    """Test para obtener usuarios."""
-    respuesta = cliente.get('/usuarios')
-    assert respuesta.status_code == 200
-    assert len(respuesta.json) == 2
-
-
-def test_procesar_nombre():
-    """Test para procesamiento de nombres."""
-    assert procesar_nombre('juan perez') == 'Juan Perez'</code>
-            </div>
-        </div>
-
-        <h5>Pasos para Ejecutar</h5>
-
-        <ol>
-            <li><strong>Crea el virtual environment:</strong>
-                <div class="code-block">
-                    <button class="copy-btn" onclick="copiarCodigo(this)">Copiar</button>
-                    <code>python -m venv venv
-source venv/bin/activate  # En Windows: venv\Scripts\activate</code>
+                    <tr>
+                        <td><strong>PyCharm Community</strong></td>
+                        <td>Gratis</td>
+                        <td>⭐⭐⭐⭐</td>
+                        <td>Profesionales</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Google Colab</strong></td>
+                        <td>Gratis (con GPU)</td>
+                        <td>⭐⭐⭐⭐⭐</td>
+                        <td>Data Science</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Anaconda + Jupyter</strong></td>
+                        <td>Gratis</td>
+                        <td>⭐⭐⭐⭐</td>
+                        <td>Ciencia de datos</td>
+                    </tr>
+                </table>
+
+                <h3>Visual Studio Code (VS Code) - RECOMENDADO</h3>
+                <p><strong>¿Por qué VS Code?</strong> Es gratis, rápido, fácil de usar y tiene toneladas de extensiones. La mayoría de los programadores lo usan.</p>
+
+                <h4>Instalación</h4>
+                <ol>
+                    <li>Ir a <a href="https://code.visualstudio.com" target="_blank">https://code.visualstudio.com</a></li>
+                    <li>Descargar para tu sistema (Windows, Mac, Linux)</li>
+                    <li>Ejecutar el instalador</li>
+                    <li>Abrir VS Code</li>
+                </ol>
+
+                <h4>Requisitos mínimos</h4>
+                <ul>
+                    <li>RAM: 2 GB</li>
+                    <li>Espacio: 200 MB</li>
+                    <li>Windows 7+, Mac 10.11+, o Linux</li>
+                </ul>
+
+                <h4>Instalar Python en tu computadora</h4>
+                <p><strong>Windows:</strong> Descargar de <a href="https://www.python.org" target="_blank">python.org</a> (marca "Add Python to PATH")</p>
+                <p><strong>Mac:</strong> <code>brew install python3</code></p>
+                <p><strong>Linux:</strong> Ya viene instalado</p>
+
+                <h4>Verificar instalación</h4>
+                <pre>
+python --version</pre>
+
+                <h3>PyCharm Community</h3>
+                <p>IDE especializado en Python. Descargar: <a href="https://www.jetbrains.com/pycharm" target="_blank">https://www.jetbrains.com/pycharm</a></p>
+                <p><strong>Ventaja:</strong> Muy poderoso para proyectos grandes.</p>
+                <p><strong>Desventaja:</strong> Más pesado que VS Code (usa más RAM).</p>
+
+                <h3>Google Colab</h3>
+                <p>Cuadernos en la nube (como Jupyter). No necesitas instalar nada.</p>
+                <p>Acceso: <a href="https://colab.research.google.com" target="_blank">https://colab.research.google.com</a></p>
+                <p><strong>Ventaja:</strong> GPU gratis para machine learning.</p>
+
+                <h3>Anaconda + Jupyter</h3>
+                <p>Distribución Python con 1500+ paquetes para ciencia de datos.</p>
+                <p>Descargar: <a href="https://www.anaconda.com/download" target="_blank">https://www.anaconda.com/download</a></p>
+            </section>
+
+            <!-- SECCIÓN 3: VS CODE DETALLADO -->
+            <section id="vscode">
+                <h2>3. Visual Studio Code - Guía Rápida</h2>
+
+                <h3>¿Por qué VS Code?</h3>
+                <ul>
+                    <li>✅ Gratis</li>
+                    <li>✅ Rápido (consume poca memoria)</li>
+                    <li>✅ Miles de extensiones</li>
+                    <li>✅ Excelente autocompletado</li>
+                    <li>✅ Integración con Git incorporada</li>
+                    <li>✅ Comunidad muy activa</li>
+                </ul>
+
+                <h3>Primeros pasos en VS Code</h3>
+                <ol>
+                    <li>Abrir VS Code</li>
+                    <li>Presionar Ctrl+K Ctrl+O (o Cmd+K Cmd+O en Mac)</li>
+                    <li>Seleccionar una carpeta vacía para tu proyecto</li>
+                    <li>Hacer clic en "Select Folder"</li>
+                </ol>
+
+                <h3>Crear tu primer archivo Python</h3>
+                <ol>
+                    <li>En el panel izquierdo, hacer clic en "New File"</li>
+                    <li>Nombrar: <code>hola.py</code></li>
+                    <li>Escribir:</li>
+                </ol>
+
+                <pre><code>
+print("¡Hola, mundo!")
+</code></pre>
+
+                <ol start="4">
+                    <li>Presionar Ctrl+S para guardar</li>
+                    <li>Presionar Ctrl+F5 para ejecutar</li>
+                </ol>
+
+                <div class="success-box">
+                    <strong>Resultado:</strong> Verás en la terminal: <code>¡Hola, mundo!</code>
                 </div>
-            </li>
-            <li><strong>Instala dependencias:</strong>
-                <div class="code-block">
-                    <button class="copy-btn" onclick="copiarCodigo(this)">Copiar</button>
-                    <code>pip install -r requirements.txt</code>
+            </section>
+
+            <!-- SECCIÓN 4: EXTENSIONES -->
+            <section id="extensiones">
+                <h2>4. Las 10 Extensiones Más Importantes</h2>
+
+                <p>Las extensiones son plugins que agregan funcionalidades a VS Code. Son lo que lo hace tan poderoso.</p>
+
+                <h3>Cómo instalar una extensión</h3>
+                <ol>
+                    <li>En VS Code, hacer clic en el icono de "Extensions" (izquierda, parece una cuadrícula)</li>
+                    <li>Buscar la extensión por nombre</li>
+                    <li>Hacer clic en "Install"</li>
+                </ol>
+
+                <h3>Las 10 extensiones esenciales</h3>
+
+                <h4>1. Python (Microsoft) ⭐ IMPRESCINDIBLE</h4>
+                <p><strong>¿Para qué?</strong> Soporte completo para Python: ejecución, autocompletado, debugging.</p>
+                <p><strong>Cómo instalar:</strong> Buscar "Python" en extensions, la primera de Microsoft, click "Install".</p>
+
+                <h4>2. Pylance (Microsoft)</h4>
+                <p><strong>¿Para qué?</strong> Detecta errores antes de ejecutar el código.</p>
+                <p><strong>Beneficio:</strong> Si escribes algo mal, verás una línea ondulada roja.</p>
+
+                <h4>3. Black Formatter (Microsoft)</h4>
+                <p><strong>¿Para qué?</strong> Formatea automáticamente tu código a PEP 8 (estándar Python).</p>
+                <p><strong>Cómo usar:</strong> Presiona Ctrl+Shift+P, escribe "Format Document", Enter.</p>
+                <p><strong>Resultado:</strong> Tu código se ve limpio y profesional sin esfuerzo.</p>
+
+                <h4>4. Flake8 (Microsoft)</h4>
+                <p><strong>¿Para qué?</strong> Detecta errores y problemas de estilo en tiempo real.</p>
+                <p><strong>Cómo instalar Flake8 en tu PC:</strong></p>
+                <pre>
+pip install flake8</pre>
+
+                <h4>5. Pytest (Microsoft)</h4>
+                <p><strong>¿Para qué?</strong> Ejecutar pruebas unitarias de tu código.</p>
+                <p><strong>Cómo instalar Pytest en tu PC:</strong></p>
+                <pre>
+pip install pytest</pre>
+
+                <h4>6. Thunder Client (Thunder Client)</h4>
+                <p><strong>¿Para qué?</strong> Probar APIs sin salir de VS Code (como Postman).</p>
+                <p><strong>Cuándo lo necesitas:</strong> Cuando hagas backend con Flask o FastAPI.</p>
+
+                <h4>7. GitLens (Eric Amodio)</h4>
+                <p><strong>¿Para qué?</strong> Ver el historial de Git en el editor.</p>
+                <p><strong>Beneficio:</strong> Saber quién cambió cada línea de código y cuándo.</p>
+
+                <h4>8. Prettier (Prettier)</h4>
+                <p><strong>¿Para qué?</strong> Formatea HTML, CSS, JSON (útil si mezclas con web).</p>
+
+                <h4>9. Better Comments (Aaron Bond)</h4>
+                <p><strong>¿Para qué?</strong> Colorea tus comentarios según tipo (TODO, FIXME, etc.).</p>
+                <p><strong>Ejemplo:</strong></p>
+                <pre>
+# TODO: Agregar validación
+# FIXME: Bug en la función sumar
+# HACK: Solución temporal
+</code></pre>
+
+                <h4>10. Relative Path (Jakob101)</h4>
+                <p><strong>¿Para qué?</strong> Autocompletado de rutas de archivos.</p>
+
+                <h3>Instalar las 10 extensiones rápidamente</h3>
+                <p>Copia cada nombre en el buscador de extensions (Ctrl+Shift+X):</p>
+                <ul>
+                    <li>Python (Microsoft)</li>
+                    <li>Pylance (Microsoft)</li>
+                    <li>Black Formatter (Microsoft)</li>
+                    <li>Flake8 (Microsoft)</li>
+                    <li>Thunder Client</li>
+                    <li>GitLens (Eric Amodio)</li>
+                    <li>Prettier (Prettier)</li>
+                    <li>Better Comments (Aaron Bond)</li>
+                    <li>Relative Path (Jakob101)</li>
+                </ul>
+            </section>
+
+            <!-- SECCIÓN 5: PROYECTO PYTHON -->
+            <section id="proyecto-python">
+                <h2>5. Proyecto Práctico: Calculadora Python</h2>
+
+                <h3>Estructura del proyecto</h3>
+                <pre>
+mi_calculadora/
+├── main.py
+├── calculadora.py
+└── README.md</pre>
+
+                <h3>Paso 1: Crear carpeta</h3>
+                <pre>
+mkdir mi_calculadora
+cd mi_calculadora
+code .</pre>
+
+                <h3>Paso 2: Crear calculadora.py</h3>
+                <p>Botón derecho en el explorador → New File → escribir "calculadora.py"</p>
+
+                <pre><code>
+# calculadora.py
+def sumar(a, b):
+    """Suma dos números."""
+    return a + b
+
+def restar(a, b):
+    """Resta dos números."""
+    return a - b
+
+def multiplicar(a, b):
+    """Multiplica dos números."""
+    return a * b
+
+def dividir(a, b):
+    """Divide dos números."""
+    if b == 0:
+        return "Error: No se puede dividir por cero"
+    return a / b
+</code></pre>
+
+                <h3>Paso 3: Crear main.py</h3>
+                <pre><code>
+# main.py
+from calculadora import sumar, restar, multiplicar, dividir
+
+print("=" * 40)
+print("   CALCULADORA SIMPLE")
+print("=" * 40)
+
+a = 10
+b = 5
+
+print(f"\nSuma: {a} + {b} = {sumar(a, b)}")
+print(f"Resta: {a} - {b} = {restar(a, b)}")
+print(f"Multiplicación: {a} * {b} = {multiplicar(a, b)}")
+print(f"División: {a} / {b} = {dividir(a, b)}")
+
+print("\n" + "=" * 40)
+</code></pre>
+
+                <h3>Paso 4: Ejecutar</h3>
+                <p>En VS Code, presionar Ctrl+F5 o click en el botón Play (arriba a la derecha).</p>
+
+                <div class="success-box">
+                    <strong>Salida esperada:</strong><br>
+                    ========================================<br>
+                    &nbsp;&nbsp;&nbsp;CALCULADORA SIMPLE<br>
+                    ========================================<br><br>
+                    Suma: 10 + 5 = 15<br>
+                    Resta: 10 - 5 = 5<br>
+                    Multiplicación: 10 * 5 = 50<br>
+                    División: 10 / 5 = 2.0<br><br>
+                    ========================================
                 </div>
-            </li>
-            <li><strong>Ejecuta los tests:</strong>
-                <div class="code-block">
-                    <button class="copy-btn" onclick="copiarCodigo(this)">Copiar</button>
-                    <code>pytest tests/</code>
+
+                <h3>Uso de extensiones en este proyecto</h3>
+                <ul>
+                    <li><strong>Python:</strong> Al escribir <code>sumar(</code>, aparecen los parámetros automáticamente</li>
+                    <li><strong>Pylance:</strong> Si escribes mal un nombre de función, te lo marca en rojo</li>
+                    <li><strong>Black Formatter:</strong> Ctrl+Shift+P → "Format Document" → tu código se formatea automáticamente</li>
+                    <li><strong>Better Comments:</strong> Escribe <code># TODO: mejorar función</code> → aparece en rojo</li>
+                </ul>
+            </section>
+
+            <!-- SECCIÓN 6: GIT INTRODUCCIÓN -->
+            <section id="git-intro">
+                <h2>6. Introducción a Git</h2>
+
+                <h3>¿Qué es Git?</h3>
+                <p>Git es un programa que rastraea cambios en tus archivos. Te permite:</p>
+                <ul>
+                    <li>Ver quién cambió qué y cuándo</li>
+                    <li>Volver a versiones anteriores si algo se daña</li>
+                    <li>Trabajar con otras personas sin sobrescribir cambios</li>
+                    <li>Crear versiones "ramas" de tu código</li>
+                </ul>
+
+                <h3>¿Qué es GitHub?</h3>
+                <p>GitHub es un sitio web donde puedes subir tu código con Git. Es como Google Drive, pero para código.</p>
+                <p><a href="https://github.com" target="_blank">https://github.com</a></p>
+
+                <h3>Instalar Git</h3>
+
+                <h4>Windows</h4>
+                <ol>
+                    <li>Ir a <a href="https://git-scm.com" target="_blank">https://git-scm.com</a></li>
+                    <li>Descargar "Git for Windows"</li>
+                    <li>Ejecutar el instalador, siguiente, siguiente...</li>
+                    <li>Listo</li>
+                </ol>
+
+                <h4>Mac</h4>
+                <pre>
+brew install git</pre>
+
+                <h4>Linux</h4>
+                <pre>
+sudo apt install git</pre>
+
+                <h3>Verificar instalación</h3>
+                <pre>
+git --version</pre>
+
+                <p>Deberías ver algo como: <code>git version 2.40.0</code></p>
+            </section>
+
+            <!-- SECCIÓN 7: GIT BÁSICO -->
+            <section id="git-basico">
+                <h2>7. Comandos Básicos de Git</h2>
+
+                <h3>Paso 1: Configuración inicial</h3>
+                <p>Haz esto solo UNA VEZ. Git necesita saber quién eres:</p>
+
+                <pre>
+git config --global user.name "Tu Nombre"
+git config --global user.email "tu@email.com"</pre>
+
+                <p>Por ejemplo:</p>
+                <pre>
+git config --global user.name "Juan Pérez"
+git config --global user.email "juan@gmail.com"</pre>
+
+                <h3>Paso 2: Inicializar Git en tu proyecto</h3>
+                <p>En tu carpeta del proyecto (mi_calculadora), abre terminal y ejecuta:</p>
+
+                <pre>
+git init</pre>
+
+                <div class="success-box">
+                    <strong>Salida:</strong> "Initialized empty Git repository..."
                 </div>
-            </li>
-            <li><strong>Inicia la aplicación:</strong>
-                <div class="code-block">
-                    <button class="copy-btn" onclick="copiarCodigo(this)">Copiar</button>
-                    <code>python src/app.py</code>
+
+                <h3>Paso 3: Ver qué cambió</h3>
+                <pre>
+git status</pre>
+
+                <div class="success-box">
+                    <strong>Salida:</strong><br>
+                    Untracked files:<br>
+                    &nbsp;&nbsp;&nbsp;&nbsp;calculadora.py<br>
+                    &nbsp;&nbsp;&nbsp;&nbsp;main.py<br>
+                    &nbsp;&nbsp;&nbsp;&nbsp;README.md<br><br>
+                    (no hay cambios agregados al commit)
                 </div>
-            </li>
-        </ol>
 
-        <h5>Salida Esperada</h5>
+                <p><strong>Explicación:</strong> Git ve tus archivos pero no los está rastreando todavía.</p>
 
-        <div class="code-block">
-            <button class="copy-btn" onclick="copiarCodigo(this)">Copiar</button>
-            <code>$ pytest tests/
-===================== test session starts =======================
-collected 4 items
+                <h3>Paso 4: Agregar un archivo</h3>
+                <p>Para que Git comience a rastrear un archivo específico:</p>
 
-tests/test_app.py::test_validar_email_valido PASSED       [ 25%]
-tests/test_app.py::test_validar_email_invalido PASSED     [ 50%]
-tests/test_app.py::test_obtener_usuarios PASSED           [ 75%]
-tests/test_app.py::test_procesar_nombre PASSED            [100%]
+                <pre>
+git add calculadora.py</pre>
 
-===================== 4 passed in 0.15s ========================</code>
-        </div>
+                <h3>Paso 5: Agregar TODOS los archivos</h3>
+                <p>Para agregar todos los archivos de una vez:</p>
 
-    </section>
+                <pre>
+git add .</pre>
 
-    <!-- SECCIÓN 5: CONCLUSIONES -->
-    <section id="conclusiones">
-        <h2>5. Conclusiones y Recomendaciones</h2>
+                <p>(El punto significa "todos")</p>
 
-        <h3>¿Cuál IDE Elegir?</h3>
+                <div class="info-box">
+                    <strong>Tip:</strong> Después de hacer <code>git add .</code>, ejecuta <code>git status</code> de nuevo. Los archivos ahora estarán en verde (listos para guardar).
+                </div>
 
-        <h4>Si eres Principiante</h4>
-        <ul>
-            <li><strong>Primera Opción:</strong> Google Colab (sin instalación) o VS Code (fácil de instalar)</li>
-            <li><strong>Por qué:</strong> Sin fricción inicial, interfaz simple, enorme comunidad</li>
-        </ul>
+                <h3>Paso 6: Guardar cambios (hacer commit)</h3>
+                <p>Un "commit" es como tomar una foto de tu código en este momento:</p>
 
-        <h4>Si Eres Desarrollador Intermedio</h4>
-        <ul>
-            <li><strong>Primera Opción:</strong> Visual Studio Code con extensiones Python, Pylance, Black, Flake8</li>
-            <li><strong>Por qué:</strong> Potencia, flexibilidad, velocidad, comunidad activa</li>
-        </ul>
+                <pre>
+git commit -m "Inicial: Agregar proyecto calculadora"</pre>
 
-        <h4>Si Eres Profesional</h4>
-        <ul>
-            <li><strong>Desarrollo Web:</strong> PyCharm Professional + VS Code para JavaScript</li>
-            <li><strong>Data Science:</strong> Anaconda + Jupyter + Google Colab para GPU gratis</li>
-        </ul>
+                <div class="success-box">
+                    <strong>Salida:</strong><br>
+                    [main a1b2c3d] Inicial: Agregar proyecto calculadora<br>
+                    3 files changed, 45 insertions(+)<br>
+                    create mode 100644 calculadora.py
+                </div>
 
-        <h3>Próximos Pasos</h3>
+                <p><strong>Notas:</strong></p>
+                <ul>
+                    <li>El número <code>a1b2c3d</code> es el ID único de tu commit (siempre diferente)</li>
+                    <li>El texto después de <code>-m</code> es el mensaje (debe ser descriptivo)</li>
+                    <li>Usa verbos: "Agregar", "Corregir", "Actualizar"</li>
+                </ul>
 
-        <ol>
-            <li>Instala tu IDE elegido</li>
-            <li>Instala las extensiones básicas (Python, Pylance, Black, Flake8)</li>
-            <li>Crea tu primer proyecto Python</li>
-            <li>Aprende Git y GitHub</li>
-            <li>Escribe tus primeros tests</li>
-        </ol>
+                <h3>Paso 7: Hacer más cambios</h3>
 
-        <div class="info-box success" style="margin-top: 2rem;">
-            <strong>🎉 ¡Felicitaciones!</strong> Ahora tienes el conocimiento para elegir y configurar correctamente tu entorno de desarrollo Python. El siguiente paso es practicar constantemente. ¡Buena suerte!
-        </div>
+                <p>Edita <code>calculadora.py</code> y agrega una nueva función:</p>
 
-    </section>
+                <pre><code>
+def potencia(a, b):
+    """Eleva a a la potencia b."""
+    return a ** b
+</code></pre>
 
+                <p>Luego:</p>
+
+                <pre>
+git add calculadora.py
+git commit -m "Agregar función potencia"</pre>
+
+                <h3>Paso 8: Ver el historial</h3>
+                <p>Para ver todos tus commits:</p>
+
+                <pre>
+git log --oneline</pre>
+
+                <div class="success-box">
+                    <strong>Salida:</strong><br>
+                    b2c3d4e Agregar función potencia<br>
+                    a1b2c3d Inicial: Agregar proyecto calculadora
+                </div>
+
+                <p><strong>Explicación:</strong> Ves todos los cambios en orden, del más reciente al más antiguo.</p>
+
+                <h3>Ver detalles de un commit</h3>
+                <pre>
+git log</pre>
+
+                <p>Muestra toda la información: autor, fecha, mensaje, y qué cambió.</p>
+
+                <h3>Ver exactamente qué cambió</h3>
+                <pre>
+git show a1b2c3d</pre>
+
+                <p>Reemplaza <code>a1b2c3d</code> con el ID de tu commit.</p>
+
+                <h3>Resumen de flujo básico</h3>
+                <ol>
+                    <li><code>git status</code> - Ver qué cambió</li>
+                    <li><code>git add .</code> - Agregar cambios</li>
+                    <li><code>git commit -m "mensaje"</code> - Guardar cambios</li>
+                    <li><code>git log --oneline</code> - Ver historial</li>
+                </ol>
+
+                <p>Repite estos 4 pasos cada vez que termines de hacer algo importante.</p>
+            </section>
+
+            <!-- SECCIÓN 8: VOLVER A VERSIÓN ANTERIOR -->
+            <section id="git-ramas">
+                <h2>8. Volver a una Versión Anterior</h2>
+
+                <h3>¿Qué pasa si cometes un error?</h3>
+                <p>Git te permite volver a cualquier versión anterior. No hay problema.</p>
+
+                <h3>Caso 1: No quiero guardar estos cambios (aún no hiciste commit)</h3>
+
+                <p>Si editaste un archivo pero TODAVÍA no hiciste <code>git commit</code>, puedes descartar cambios:</p>
+
+                <pre>
+git checkout -- calculadora.py</pre>
+
+                <div class="warning" style="background: #fff3cd; border-left: 4px solid #ffc107; padding: 15px; margin: 20px 0; border-radius: 4px;">
+                    <strong>Advertencia:</strong> Esto elimina tus cambios locales. No lo puedes deshacer.
+                </div>
+
+                <h3>Caso 2: Quiero volver a una versión anterior (después de commit)</h3>
+
+                <p>Primero, ve tu historial:</p>
+
+                <pre>
+git log --oneline</pre>
+
+                <div class="success-box">
+                    <strong>Salida:</strong><br>
+                    c3d4e5f Agregar función logaritmo<br>
+                    b2c3d4e Agregar función potencia<br>
+                    a1b2c3d Inicial: Agregar proyecto calculadora
+                </div>
+
+                <p>Digamos que quieres volver a <code>b2c3d4e</code> (antes de agregar logaritmo):</p>
+
+                <pre>
+git reset --soft b2c3d4e</pre>
+
+                <div class="success-box">
+                    <strong>¿Qué pasa?</strong> Vuelves al commit anterior, pero TUS CAMBIOS siguen ahí (puedes verlos con <code>git status</code>). Es seguro.
+                </div>
+
+                <h3>Caso 3: Volver atrás COMPLETAMENTE (peligroso)</h3>
+
+                <p>Si quieres descartar TODO (incluyendo tus cambios):</p>
+
+                <pre>
+git reset --hard b2c3d4e</pre>
+
+                <div class="danger-box">
+                    <strong>⚠️ CUIDADO:</strong> Esto elimina permanentemente todos los cambios posteriores. No lo hagas a menos que estés seguro.
+                </div>
+
+                <h3>Caso 4: Ver cómo era el código antes</h3>
+
+                <p>Sin cambiar nada, solo para mirar:</p>
+
+                <pre>
+git show b2c3d4e:calculadora.py</pre>
+
+                <p>Esto muestra el contenido del archivo en ese commit específico.</p>
+
+                <h3>Resumen - Volver atrás</h3>
+                <table>
+                    <tr>
+                        <th>Situación</th>
+                        <th>Comando</th>
+                        <th>¿Es seguro?</th>
+                    </tr>
+                    <tr>
+                        <td>Descartar cambios locales (sin commit)</td>
+                        <td><code>git checkout -- archivo.py</code></td>
+                        <td>No - Pierdes cambios</td>
+                    </tr>
+                    <tr>
+                        <td>Volver atrás (guardar cambios)</td>
+                        <td><code>git reset --soft ID</code></td>
+                        <td>Sí - Cambios siguen ahí</td>
+                    </tr>
+                    <tr>
+                        <td>Volver atrás (descartar todo)</td>
+                        <td><code>git reset --hard ID</code></td>
+                        <td>No - Pierdes todo</td>
+                    </tr>
+                    <tr>
+                        <td>Solo ver cómo era</td>
+                        <td><code>git show ID:archivo</code></td>
+                        <td>Sí - Solo miras</td>
+                    </tr>
+                </table>
+            </section>
+
+            <!-- SECCIÓN 9: RAMAS BÁSICAS -->
+            <section id="git-ramas-basico">
+                <h2>9. Ramas: Desarrollo Paralelo Básico</h2>
+
+                <h3>¿Qué es una rama?</h3>
+                <p>Una rama es una "copia" de tu código donde puedes trabajar sin afectar la rama principal. Es como tener dos versiones del proyecto al mismo tiempo.</p>
+
+                <h3>¿Por qué usarlas?</h3>
+                <ul>
+                    <li>Trabajar en nuevas funciones sin romper el código principal</li>
+                    <li>Varias personas pueden trabajar en paralelo</li>
+                    <li>Experimentar sin miedo a arruinar todo</li>
+                </ul>
+
+                <h3>Rama principal vs rama secundaria</h3>
+                <p><strong>main (o master):</strong> La rama principal, el código que funciona y está en "producción".</p>
+                <p><strong>feature/nueva-funcion:</strong> Rama de trabajo donde desarrollas algo nuevo.</p>
+
+                <h3>Paso 1: Ver ramas actuales</h3>
+
+                <pre>
+git branch</pre>
+
+                <div class="success-box">
+                    <strong>Salida:</strong><br>
+                    * main<br>
+                    <br>
+                    (El asterisco * indica en qué rama estás)
+                </div>
+
+                <h3>Paso 2: Crear una rama nueva</h3>
+
+                <pre>
+git branch feature/raiz-cuadrada</pre>
+
+                <h3>Paso 3: Cambiar a esa rama</h3>
+
+                <pre>
+git checkout feature/raiz-cuadrada</pre>
+
+                <div class="success-box">
+                    <strong>Salida:</strong> Switched to branch 'feature/raiz-cuadrada'
+                </div>
+
+                <p>O crear y cambiar en UN COMANDO:</p>
+
+                <pre>
+git checkout -b feature/raiz-cuadrada</pre>
+
+                <h3>Paso 4: Trabajar en la rama</h3>
+
+                <p>Edita <code>calculadora.py</code> y agrega:</p>
+
+                <pre><code>
+import math
+
+def raiz_cuadrada(a):
+    """Calcula la raíz cuadrada."""
+    if a < 0:
+        return "Error: No se puede calcular raíz de número negativo"
+    return math.sqrt(a)
+</code></pre>
+
+                <p>Ahora haz commit:</p>
+
+                <pre>
+git add calculadora.py
+git commit -m "Agregar función raiz_cuadrada"</pre>
+
+                <h3>Paso 5: Volver a main</h3>
+
+                <pre>
+git checkout main</pre>
+
+                <p><strong>Nota:</strong> Tu código EN MAIN NO TIENE la función raiz_cuadrada. Está solo en la rama feature/.</p>
+
+                <h3>Paso 6: Unir ramas (Merge)</h3>
+
+                <p>Cuando terminaste de trabajar en la feature y quieres agregarla a main:</p>
+
+                <pre>
+git merge feature/raiz-cuadrada</pre>
+
+                <div class="success-box">
+                    <strong>Salida:</strong><br>
+                    Updating a1b2c3d..b2c3d4e<br>
+                    Fast-forward<br>
+                    calculadora.py | 7 ++++++<br>
+                    1 file changed, 7 insertions(+)
+                </div>
+
+                <p><strong>Explicación:</strong> Los cambios de feature/ ahora están en main. ¡Listo!</p>
+
+                <h3>Paso 7: Eliminar rama usada</h3>
+
+                <p>Ya no necesitas la rama feature/:</p>
+
+                <pre>
+git branch -d feature/raiz-cuadrada</pre>
+
+                <h3>Diagrama simple de ramas</h3>
+
+                <div class="ascii-diagram">
+main:   A---B---C---D (commit inicial → agregar → trabajar → merge feature)
+            \   /
+feature/    B1-C1 (rama paralela)
+
+Después de merge:
+main:   A---B---C---D---D' (contiene cambios de feature)
 </div>
 
-<!-- FOOTER -->
-<footer>
-    <p><strong>Clase Completa: IDEs para Programación en Python</strong></p>
-    <p>Última actualización: Mayo 2026</p>
-    <p>Para preguntas: <a href="mailto:soporte@ejemplo.com">soporte@ejemplo.com</a></p>
-</footer>
+                <h3>Buenas prácticas de nombres de ramas</h3>
+                <table>
+                    <tr>
+                        <th>Tipo</th>
+                        <th>Nombre</th>
+                        <th>Ejemplo</th>
+                    </tr>
+                    <tr>
+                        <td>Nueva funcionalidad</td>
+                        <td>feature/...</td>
+                        <td>feature/agregar-busqueda</td>
+                    </tr>
+                    <tr>
+                        <td>Corrección de bug</td>
+                        <td>bugfix/...</td>
+                        <td>bugfix/corregir-login</td>
+                    </tr>
+                    <tr>
+                        <td>Documentación</td>
+                        <td>docs/...</td>
+                        <td>docs/actualizar-readme</td>
+                    </tr>
+                </table>
 
-<script>
-    function copiarCodigo(boton) {
-        const bloque = boton.nextElementSibling;
-        const codigo = bloque.innerText;
-        
-        navigator.clipboard.writeText(codigo).then(() => {
-            const textoOriginal = boton.innerText;
-            boton.innerText = '✓ Copiado';
-            setTimeout(() => {
-                boton.innerText = textoOriginal;
-            }, 2000);
-        });
-    }
+                <h3>Resumen de ramas</h3>
+                <ul>
+                    <li><code>git branch</code> - Ver ramas</li>
+                    <li><code>git branch nombre</code> - Crear rama</li>
+                    <li><code>git checkout nombre</code> - Cambiar a rama</li>
+                    <li><code>git checkout -b nombre</code> - Crear y cambiar</li>
+                    <li><code>git merge nombre</code> - Unir rama a donde estás</li>
+                    <li><code>git branch -d nombre</code> - Eliminar rama</li>
+                </ul>
+            </section>
 
-    document.getElementById('navbarToggle').addEventListener('click', () => {
-        const menu = document.getElementById('navbarMenu');
-        menu.style.display = menu.style.display === 'none' ? 'flex' : 'none';
-    });
+            <!-- SECCIÓN 10: GITHUB -->
+            <section id="github">
+                <h2>10. GitHub: Subir tu código a la nube</h2>
 
-    document.querySelectorAll('.navbar-menu a').forEach(link => {
-        link.addEventListener('click', () => {
-            if (window.innerWidth <= 768) {
-                document.getElementById('navbarMenu').style.display = 'none';
-            }
-        });
-    });
-</script>
+                <h3>¿Por qué usar GitHub?</h3>
+                <ul>
+                    <li>Backup de tu código (no se pierde si se daña tu PC)</li>
+                    <li>Compartir código con otros</li>
+                    <li>Portafolio para mostrar a empleadores</li>
+                    <li>Colaborar en equipo</li>
+                </ul>
 
+                <h3>Paso 1: Crear cuenta GitHub</h3>
+                <ol>
+                    <li>Ir a <a href="https://github.com" target="_blank">https://github.com</a></li>
+                    <li>Hacer clic en "Sign up"</li>
+                    <li>Ingresar email, contraseña, usuario</li>
+                    <li>Verificar email</li>
+                </ol>
+
+                <h3>Paso 2: Crear repositorio en GitHub</h3>
+                <ol>
+                    <li>En GitHub, arriba a la derecha, hacer clic en "+" → "New repository"</li>
+                    <li>Nombre: <code>mi_calculadora</code></li>
+                    <li>Descripción: "Calculadora simple con Python"</li>
+                    <li>Seleccionar "Public"</li>
+                    <li>NO marcar "Initialize with README"</li>
+                    <li>Hacer clic en "Create repository"</li>
+                </ol>
+
+                <h3>Paso 3: Conectar tu computadora con GitHub</h3>
+
+                <p>GitHub te mostrará comandos. Copia y ejecuta en tu carpeta local:</p>
+
+                <pre>
+git branch -M main
+git remote add origin https://github.com/TU_USUARIO/mi_calculadora.git
+git push -u origin main</pre>
+
+                <p><strong>Reemplaza TU_USUARIO con tu nombre de usuario en GitHub.</strong></p>
+
+                <p>Ejemplo real:</p>
+                <pre>
+git branch -M main
+git remote add origin https://github.com/juan_perez/mi_calculadora.git
+git push -u origin main</pre>
+
+                <div class="success-box">
+                    <strong>Salida:</strong><br>
+                    Enumerating objects: 3, done...<br>
+                    ...<br>
+                    To https://github.com/juan_perez/mi_calculadora.git<br>
+                    &nbsp;* [new branch]&nbsp;&nbsp;main -> main<br>
+                    Branch 'main' set up to track remote branch 'main' from 'origin'.
+                </div>
+
+                <h3>Paso 4: Verificar en GitHub</h3>
+
+                <p>Recarga la página en GitHub. ¡Verás tu código subido!</p>
+
+                <h3>Paso 5: Hacer cambios locales y subirlos</h3>
+
+                <p>En tu computadora, haz cambios:</p>
+
+                <pre>
+# Editar calculadora.py
+git add .
+git commit -m "Mejora: agregar validación"
+git push</pre>
+
+                <p><code>git push</code> sube tus cambios a GitHub.</p>
+
+                <h3>Paso 6: Descargar cambios de GitHub</h3>
+
+                <p>Si trabajas desde otra computadora o alguien más hace cambios:</p>
+
+                <pre>
+git pull</pre>
+
+                <p>Esto descarga los cambios de GitHub a tu computadora.</p>
+
+                <h3>Resumen de GitHub</h3>
+                <table>
+                    <tr>
+                        <th>Acción</th>
+                        <th>Comando</th>
+                    </tr>
+                    <tr>
+                        <td>Ver repositorios remotos</td>
+                        <td><code>git remote -v</code></td>
+                    </tr>
+                    <tr>
+                        <td>Subir cambios a GitHub</td>
+                        <td><code>git push</code></td>
+                    </tr>
+                    <tr>
+                        <td>Descargar cambios de GitHub</td>
+                        <td><code>git pull</code></td>
+                    </tr>
+                    <tr>
+                        <td>Ver URL del repositorio remoto</td>
+                        <td><code>git remote -v</code></td>
+                    </tr>
+                </table>
+
+                <h3>Flujo completo: hacer cambios y subirlos</h3>
+                <ol>
+                    <li><code>git add .</code> - Agregar cambios</li>
+                    <li><code>git commit -m "mensaje"</code> - Guardar localmente</li>
+                    <li><code>git push</code> - Subir a GitHub</li>
+                </ol>
+
+                <p>Y si trabajas en equipo:</p>
+                <ol>
+                    <li><code>git pull</code> - Descargar cambios de otros</li>
+                    <li>(hacer tu trabajo)</li>
+                    <li><code>git add . && git commit -m "msg" && git push</code> - Todo en uno</li>
+                </ol>
+            </section>
+
+            <!-- SECCIÓN 11: CONCLUSIONES -->
+            <section id="conclusiones">
+                <h2>11. Conclusiones</h2>
+
+                <h3>Lo que aprendiste</h3>
+                <ul>
+                    <li>✅ Qué es un IDE y por qué necesitas uno</li>
+                    <li>✅ Visual Studio Code: instalación y uso básico</li>
+                    <li>✅ Las 10 extensiones esenciales para escribir buen código</li>
+                    <li>✅ Crear un proyecto Python simple (Calculadora)</li>
+                    <li>✅ Git: rastrear cambios localmente</li>
+                    <li>✅ Comandos Git básicos: add, commit, log, branch</li>
+                    <li>✅ Volver a versiones anteriores</li>
+                    <li>✅ Crear y mezclar ramas (merge)</li>
+                    <li>✅ GitHub: subir código a la nube</li>
+                </ul>
+
+                <h3>Recomendaciones según tu nivel</h3>
+                <table>
+                    <tr>
+                        <th>Nivel</th>
+                        <th>IDE</th>
+                        <th>Enfoque</th>
+                        <th>Próximo paso</th>
+                    </tr>
+                    <tr>
+                        <td><strong>Principiante</strong></td>
+                        <td>VS Code</td>
+                        <td>Aprender Python básico</td>
+                        <td>Hacer pequeños programas</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Intermedio</strong></td>
+                        <td>VS Code + todas las extensiones</td>
+                        <td>Proyectos más grandes con Git</td>
+                        <td>Aprender testing (pytest)</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Avanzado</strong></td>
+                        <td>PyCharm Pro</td>
+                        <td>Desarrollo profesional</td>
+                        <td>Aprender frameworks (Django, FastAPI)</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Data Science</strong></td>
+                        <td>Google Colab o Jupyter</td>
+                        <td>Análisis de datos</td>
+                        <td>Aprender pandas, numpy, scikit-learn</td>
+                    </tr>
+                </table>
+
+                <h3>Plan de acción (próxima semana)</h3>
+                <ol>
+                    <li><strong>Día 1:</strong> Instalar VS Code + Python + las 10 extensiones</li>
+                    <li><strong>Día 2:</strong> Crear proyecto calculadora y ejecutarlo</li>
+                    <li><strong>Día 3:</strong> Instalar Git y practicar add/commit básico</li>
+                    <li><strong>Día 4:</strong> Crear cuenta GitHub y subir proyecto</li>
+                    <li><strong>Día 5:</strong> Practicar ramas: crear, cambiar, mergear</li>
+                    <li><strong>Día 6-7:</strong> Hacer pequeños proyectos con Git + GitHub</li>
+                </ol>
+
+                <h3>Recursos útiles</h3>
+                <ul>
+                    <li><strong>VS Code:</strong> <a href="https://code.visualstudio.com/docs" target="_blank">https://code.visualstudio.com/docs</a></li>
+                    <li><strong>Git:</strong> <a href="https://git-scm.com/book/es/v2" target="_blank">Pro Git Book (en español)</a></li>
+                    <li><strong>GitHub:</strong> <a href="https://docs.github.com" target="_blank">https://docs.github.com</a></li>
+                    <li><strong>Python:</strong> <a href="https://docs.python.org/3/" target="_blank">https://docs.python.org/3/</a></li>
+                    <li><strong>Real Python:</strong> <a href="https://realpython.com/" target="_blank">https://realpython.com/</a></li>
+                </ul>
+
+                <h3>Checklist final</h3>
+                <ul>
+                    <li>✅ VS Code instalado</li>
+                    <li>✅ Python instalado en tu PC</li>
+                    <li>✅ 10 extensiones instaladas en VS Code</li>
+                    <li>✅ Git instalado y configurado</li>
+                    <li>✅ Proyecto calculadora funcionando</li>
+                    <li>✅ Repositorio local inicializado (git init)</li>
+                    <li>✅ Al menos 2-3 commits hechos</li>
+                    <li>✅ Cuenta GitHub creada</li>
+                    <li>✅ Proyecto subido a GitHub</li>
+                    <li>✅ Experiencia con ramas (crear, cambiar, mergear)</li>
+                </ul>
+
+                <div class="highlight">
+                    <strong>🎯 Objetivo alcanzado:</strong> Ahora puedes escribir código en Python usando un IDE profesional, versionarlo con Git localmente, subirlo a GitHub y trabajar con ramas. ¡Eres un desarrollador moderno!
+                </div>
+            </section>
+        </main>
+
+        <footer>
+            <p>📚 <strong>Clase: IDEs para Python + Git Básico</strong></p>
+            <p>Última actualización: Mayo 2026 | Versión simplificada para principiantes e intermedios</p>
+            <p>¿Dudas? Consulta: <a href="https://code.visualstudio.com/docs" target="_blank">VS Code</a> | <a href="https://git-scm.com" target="_blank">Git</a> | <a href="https://github.com" target="_blank">GitHub</a></p>
+        </footer>
+    </div>
 </body>
 </html>
